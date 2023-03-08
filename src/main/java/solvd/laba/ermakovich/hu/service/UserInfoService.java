@@ -1,5 +1,7 @@
 package solvd.laba.ermakovich.hu.service;
 
+
+import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.domain.UserInfo;
 
 import java.util.UUID;
@@ -9,7 +11,8 @@ import java.util.UUID;
  */
 public interface UserInfoService {
 
-    UserInfo create(UserInfo userInfo);
+    Mono<Boolean> isExistByExternalId(UUID externalId);
 
-    Boolean isExistByExternalId(UUID externalId);
+    Mono<UserInfo> create(UserInfo userInfo);
+
 }

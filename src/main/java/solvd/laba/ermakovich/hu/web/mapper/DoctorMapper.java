@@ -1,7 +1,6 @@
 package solvd.laba.ermakovich.hu.web.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.domain.UserInfo;
@@ -17,7 +16,10 @@ public interface DoctorMapper {
 
     UserInfo toUserEntity(DoctorDto doctorDto);
 
-    @Mapping(target = "password", ignore = true)
     DoctorDto toDto(Doctor doctor);
+
+    default Mono<DoctorDto> toDto(Mono<Doctor> doctor) {
+        return doctor.map(this::toDto);
+    }
 
 }

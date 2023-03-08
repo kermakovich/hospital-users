@@ -21,7 +21,7 @@ public class UserController {
     private final UserInfoService userInfoService;
 
     @GetMapping
-    public Boolean isExistByExternalId(@RequestParam UUID externalId) {
+    public Mono<Boolean> isExistByExternalId(@RequestParam UUID externalId) {
         return userInfoService.isExistByExternalId(externalId);
     }
 

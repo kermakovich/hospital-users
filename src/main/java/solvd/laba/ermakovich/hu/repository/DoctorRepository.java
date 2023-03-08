@@ -6,6 +6,6 @@ import solvd.laba.ermakovich.hu.domain.Doctor;
 /**
  * @author Ermakovich Kseniya
  */
-public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+public interface DoctorRepository extends ReactiveCrudRepository<Doctor, Long> {
 
 }

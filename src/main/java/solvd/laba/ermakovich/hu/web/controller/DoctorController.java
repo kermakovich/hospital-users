@@ -26,11 +26,11 @@ public class DoctorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DoctorDto create(@Validated({OnCreate.class, Default.class}) @RequestBody DoctorDto doctorDto) {
+    public Mono<DoctorDto> create(@Validated({OnCreate.class, Default.class}) @RequestBody DoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
         UserInfo userInfo = doctorMapper.toUserEntity(doctorDto);
-        doctorService.create(doctor, userInfo);
-        return doctorMapper.toDto(doctor);
+        Mono<Doctor> doctorMono = doctorService.create(doctor, userInfo);
+        return doctorMapper.toDto(doctorMono);
     }
 
 }

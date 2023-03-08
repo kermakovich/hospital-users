@@ -1,5 +1,6 @@
 package solvd.laba.ermakovich.hu.web.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author Ermakovich Kseniya
  */
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -37,4 +39,10 @@ public class GlobalExceptionHandler {
         return new ErrorDto(ex.getMessage());
     }
 
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorDto handleOtherException(Exception ex) {
+        log.error(ex.getMessage(), ex.getClass());
+        return new ErrorDto("something is wrong, please, try later");
+    }
 }

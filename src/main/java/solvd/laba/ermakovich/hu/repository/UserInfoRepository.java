@@ -11,10 +11,12 @@ import solvd.laba.ermakovich.hu.domain.UserInfo;
  * @author Ermakovich Kseniya
  */
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
+public interface UserInfoRepository extends ReactiveCrudRepository<UserInfo, Long> {
 
-    Boolean isExistByExternalId(String uuid);
+    @Query("SELECT EXISTS(SELECT 1 FROM user_info ui WHERE ui.external_id::text = :uuid)")
+    Mono<Boolean> isExistByExternalId(@Param("uuid") String uuid);
 
-    Boolean isExistByEmail(String email);
+    @Query("SELECT EXISTS(SELECT 1 FROM user_info ui WHERE ui.email = :email)")
+    Mono<Boolean> isExistByEmail(@Param("email") String email);
 
 }

@@ -1,5 +1,6 @@
 package solvd.laba.ermakovich.hu.service;
 
+import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.domain.UserInfo;
 
@@ -8,6 +9,6 @@ import solvd.laba.ermakovich.hu.domain.UserInfo;
  */
 public interface DoctorService {
 
-    Doctor create(Doctor doctor, UserInfo userInfo);
+    Mono<Doctor> create(Doctor doctor, UserInfo userInfo);
 
 }
