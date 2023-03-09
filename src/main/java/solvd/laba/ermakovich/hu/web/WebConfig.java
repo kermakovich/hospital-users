@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.Formatter;
 import org.springframework.lang.NonNull;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ import java.util.Locale;
  * @author Ermakovich Kseniya
  */
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig {
 
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
