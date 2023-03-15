@@ -13,6 +13,10 @@ spring:
     liquibase-schema: ${SCHEMA}
   jackson:
     default-property-inclusion: NON_NULL
+  kafka:
+    producer:
+      bootstrap-servers: ${BOOTSTRAP_SERVERS}
+    topic: finance
 eureka:
   client:
     serviceUrl:
