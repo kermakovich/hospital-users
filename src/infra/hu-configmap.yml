@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: hospital-users-configmap
-data:
-  DATASOURCE_HOST: postgres:5432
-  SCHEMA: hospital
