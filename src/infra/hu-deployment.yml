@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-users
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hospital-users
+  template:
+    metadata:
+      labels:
+        app: hospital-users
+    spec:
+      containers:
+        - name: hospital-users
+          image: kermakovich/hospital-users
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secrets
+                  key: DATASOURCE_USERNAME
+            - name: DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secrets
+                  key: DATASOURCE_PASSWORD
+            - name: DATASOURCE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: DATASOURCE_HOST
+            - name: SCHEMA
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: SCHEMA
