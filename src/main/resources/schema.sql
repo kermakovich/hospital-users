@@ -9,7 +9,8 @@
       fatherhood varchar(35),
       birthday date NOT NULL,
       email varchar(320) UNIQUE NOT NULL,
-      password varchar(20) NOT NULL
+      password varchar(20) NOT NULL,
+      externalId uuid
   );
 
 
