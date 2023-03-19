@@ -1,5 +1,5 @@
-  create schema if not exists hospital;
-  set schema 'hospital';
+  create schema if not exists users;
+  set schema 'users';
 
 
   CREATE TABLE IF NOT EXISTS user_info (
