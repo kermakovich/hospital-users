@@ -1,2 +1,2 @@
-create schema if not exists hospital;
-set schema 'hospital';
+create schema if not exists users;
+set schema 'users';

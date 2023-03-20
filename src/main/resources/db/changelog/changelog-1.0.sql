@@ -1,8 +1,8 @@
 --liquibase formatted sql
 --changeset ermakovich:1
 
-create schema if not exists hospital;
-set schema 'hospital';
+create schema if not exists users;
+set schema 'users';
 
 
 CREATE TABLE IF NOT EXISTS user_info (
@@ -12,7 +12,9 @@ CREATE TABLE IF NOT EXISTS user_info (
     fatherhood varchar(35),
     birthday date NOT NULL,
     email varchar(320) UNIQUE NOT NULL,
-    password varchar(20) NOT NULL
+    role character varying(20) NOT NULL,
+    password varchar(300) NOT NULL,
+    external_id uuid
 );
 
 
