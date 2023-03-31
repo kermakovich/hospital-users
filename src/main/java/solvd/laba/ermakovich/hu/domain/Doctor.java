@@ -1,18 +1,15 @@
 package solvd.laba.ermakovich.hu.domain;
 
 import lombok.Data;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+
+import java.io.Serializable;
 
 /**
  * @author Ermakovich Kseniya
  */
 @Data
-@Table(name = "doctors")
-public class Doctor {
+public class Doctor extends UserInfo implements Serializable {
 
-    @Column("user_id")
-    private Long id;
     private Department department;
     private Specialization specialization;
     private Integer cabinet;

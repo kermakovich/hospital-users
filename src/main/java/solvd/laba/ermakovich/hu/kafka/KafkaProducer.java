@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
-
-import java.util.UUID;
+import solvd.laba.ermakovich.hu.service.event.CreateAccountEvent;
+import solvd.laba.ermakovich.hu.service.event.Event;
 
 /**
  * @author Ermakovich Kseniya
@@ -15,18 +15,19 @@ import java.util.UUID;
 @Component
 public class KafkaProducer {
 
-    private final KafkaSender<String, UUID> sender;
+    private final KafkaSender<String, Event> sender;
 
-    public void send(final UUID value) {
+    public void send(final Event value) {
         sender.send(
                 Mono.just(
                         SenderRecord.create("finance",
                                 0,
                                 System.currentTimeMillis(),
-                                "uuid",
+                                CreateAccountEvent.EVENT_TYPE,
                                 value,
                                 null)
                 )
         ).subscribe();
     }
+
 }
