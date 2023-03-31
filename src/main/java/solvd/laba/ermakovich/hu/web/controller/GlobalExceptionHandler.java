@@ -39,10 +39,11 @@ public class GlobalExceptionHandler {
         return new ErrorDto(ex.getMessage());
     }
 
-//    @ExceptionHandler({Exception.class})
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ErrorDto handleOtherException(Exception ex) {
-//        log.error(ex.getMessage(), ex.getClass());
-//        return new ErrorDto("something is wrong, please, try later");
-//    }
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorDto handleOtherException(Exception ex) {
+        log.error(ex.getMessage(), ex.getClass());
+        return new ErrorDto("something is wrong, please, try later");
+    }
+
 }
