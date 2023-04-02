@@ -32,7 +32,8 @@ public class DoctorCommandHandler implements DoctorCommandService {
         return queryService.isExistByEmail(command.getDoctor().getEmail())
                 .flatMap(isExist -> {
                     if (Boolean.TRUE.equals(isExist)) {
-                        throw new ResourceAlreadyExistsException("User with this email: " + command.getDoctor().getEmail() + " already exist");
+                        throw new ResourceAlreadyExistsException("User with this email: " +
+                                command.getDoctor().getEmail() + " already exist");
                     } else {
                         Event createDoctor = new CreateDoctor(command.getAggregateId(), command.getDoctor());
                         eventService.on(createDoctor);
