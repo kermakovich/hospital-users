@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.query;
+package solvd.laba.ermakovich.hu.query;
 
 import reactor.core.publisher.Mono;
 

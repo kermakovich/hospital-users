@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.command;
+package solvd.laba.ermakovich.hu.command;
 
 import lombok.Data;
 import solvd.laba.ermakovich.hu.domain.Doctor;

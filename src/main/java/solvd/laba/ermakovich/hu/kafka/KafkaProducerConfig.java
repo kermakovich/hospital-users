@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
-import solvd.laba.ermakovich.hu.service.event.Event;
+import solvd.laba.ermakovich.hu.event.Event;
 
 import java.util.HashMap;
 import java.util.Map;

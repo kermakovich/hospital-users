@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.event;
+package solvd.laba.ermakovich.hu.event;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

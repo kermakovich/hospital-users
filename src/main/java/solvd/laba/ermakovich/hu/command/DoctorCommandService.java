@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.command;
+package solvd.laba.ermakovich.hu.command;
 
 import reactor.core.publisher.Mono;
 

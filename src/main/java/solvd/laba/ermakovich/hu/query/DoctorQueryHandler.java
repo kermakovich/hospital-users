@@ -1,9 +1,9 @@
-package solvd.laba.ermakovich.hu.service.query;
+package solvd.laba.ermakovich.hu.query;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.repository.DoctorRepository;
+import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
 
 import java.util.UUID;
 
@@ -18,12 +18,12 @@ public class DoctorQueryHandler implements DoctorQueryService {
 
     @Override
     public Mono<Boolean> isExistByEmail(String email) {
-        return doctorRepository.existsByEmail(email);
+        return doctorRepository.existsByDoctor_Email(email);
     }
 
     @Override
     public Mono<Boolean> isExistByExternalId(UUID externalId) {
-        return doctorRepository.existsByExternalId(externalId);
+        return doctorRepository.existsByDoctor_ExternalId(externalId);
     }
 
 }

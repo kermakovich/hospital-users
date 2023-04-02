@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
-import solvd.laba.ermakovich.hu.service.event.CreateAccountEvent;
-import solvd.laba.ermakovich.hu.service.event.Event;
+import solvd.laba.ermakovich.hu.event.CreateAccount;
+import solvd.laba.ermakovich.hu.event.Event;
 
 /**
  * @author Ermakovich Kseniya
@@ -23,7 +23,7 @@ public class KafkaProducer {
                         SenderRecord.create("finance",
                                 0,
                                 System.currentTimeMillis(),
-                                CreateAccountEvent.EVENT_TYPE,
+                                CreateAccount.EVENT_TYPE,
                                 value,
                                 null)
                 )

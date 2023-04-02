@@ -1,7 +1,7 @@
-package solvd.laba.ermakovich.hu.repository;
+package solvd.laba.ermakovich.hu.mongo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import solvd.laba.ermakovich.hu.service.event.Event;
+import solvd.laba.ermakovich.hu.event.Event;
 
 /**
  * @author Ermakovich Kseniya

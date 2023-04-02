@@ -7,10 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.service.command.CreateDoctorCommand;
-import solvd.laba.ermakovich.hu.service.command.DoctorCommandService;
+import solvd.laba.ermakovich.hu.command.CreateDoctorCommand;
+import solvd.laba.ermakovich.hu.command.DoctorCommandService;
 import solvd.laba.ermakovich.hu.domain.Doctor;
-import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
+import solvd.laba.ermakovich.hu.query.DoctorQueryService;
 import solvd.laba.ermakovich.hu.web.dto.AggregateDto;
 import solvd.laba.ermakovich.hu.web.dto.DoctorDto;
 import solvd.laba.ermakovich.hu.web.dto.group.OnCreate;
@@ -33,7 +33,8 @@ public class DoctorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<AggregateDto> create(@Validated({OnCreate.class, Default.class}) @RequestBody DoctorDto doctorDto) {
+    public Mono<AggregateDto> create(@Validated({OnCreate.class, Default.class})
+                                         @RequestBody DoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
         return commandService.handle(new CreateDoctorCommand(doctor))
                 .map(AggregateDto::new);
