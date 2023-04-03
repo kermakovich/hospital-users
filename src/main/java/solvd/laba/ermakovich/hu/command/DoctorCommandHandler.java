@@ -1,6 +1,7 @@
 package solvd.laba.ermakovich.hu.command;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -8,8 +9,8 @@ import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
 import solvd.laba.ermakovich.hu.event.CreateAccount;
 import solvd.laba.ermakovich.hu.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.event.DoctorEventService;
-import solvd.laba.ermakovich.hu.kafka.KafkaProducer;
 import solvd.laba.ermakovich.hu.event.Event;
+import solvd.laba.ermakovich.hu.kafka.KafkaProducer;
 import solvd.laba.ermakovich.hu.query.DoctorQueryService;
 
 /**
@@ -24,8 +25,8 @@ public class DoctorCommandHandler implements DoctorCommandService {
     private final DoctorQueryService queryService;
     private final KafkaProducer kafkaProducer;
 
-
     @Override
+    @SneakyThrows
     public Mono<String> handle(CreateDoctorCommand command) {
         command.getDoctor().setPassword(
                 hashPassword(command.getDoctor().getPassword()));
@@ -36,7 +37,7 @@ public class DoctorCommandHandler implements DoctorCommandService {
                                 command.getDoctor().getEmail() + " already exist");
                     } else {
                         Event createDoctor = new CreateDoctor(command.getAggregateId(), command.getDoctor());
-                        eventService.on(createDoctor);
+                        eventService.when(createDoctor);
                         Event accountEvent = new CreateAccount(command.getDoctor().getExternalId());
                         kafkaProducer.send(accountEvent);
                         return Mono.just(createDoctor.getAggregateId());

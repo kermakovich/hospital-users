@@ -1,29 +1,28 @@
 package solvd.laba.ermakovich.hu.event;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import solvd.laba.ermakovich.hu.aggregate.DoctorAggregate;
-import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
+import solvd.laba.ermakovich.hu.aggregate.AggregateService;
+import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.mongo.EventRepository;
 
 /**
  * @author Ermakovich Kseniya
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class DoctorEventHandler implements DoctorEventService {
 
-    private final DoctorRepository doctorRepository;
     private final EventRepository eventRepository;
+    private final AggregateService aggregateService;
 
     @Override
     @Transactional
-    public void on(Event event) {
-        eventRepository.save(event).subscribe();
+    public void when(Event event) {
         DoctorAggregate doctor = new DoctorAggregate(event.getAggregateId());
-        doctor.apply(event);
-        doctorRepository.save(doctor).subscribe();
+        aggregateService.apply(doctor, event);
+        eventRepository.save(event).subscribe();
     }
 
 }

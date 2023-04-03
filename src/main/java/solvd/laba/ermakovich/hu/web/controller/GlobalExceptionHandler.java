@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<ErrorDto> handleValidationException(MethodArgumentNotValidException ex) {
         List<ErrorDto> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach( error -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             FieldError fieldError = (FieldError) error;
             errors.add(new FieldErrorDto(fieldError.getField(), error.getDefaultMessage()));
         });

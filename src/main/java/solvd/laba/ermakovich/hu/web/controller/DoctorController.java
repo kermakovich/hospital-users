@@ -34,7 +34,7 @@ public class DoctorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<AggregateDto> create(@Validated({OnCreate.class, Default.class})
-                                         @RequestBody DoctorDto doctorDto) {
+                                     @RequestBody DoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
         return commandService.handle(new CreateDoctorCommand(doctor))
                 .map(AggregateDto::new);

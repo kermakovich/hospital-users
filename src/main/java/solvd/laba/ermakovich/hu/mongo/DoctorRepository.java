@@ -2,7 +2,7 @@ package solvd.laba.ermakovich.hu.mongo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.aggregate.DoctorAggregate;
+import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
 
 import java.util.UUID;
 
@@ -11,8 +11,8 @@ import java.util.UUID;
  */
 public interface DoctorRepository extends ReactiveMongoRepository<DoctorAggregate, String> {
 
-    Mono<Boolean> existsByDoctor_Email(String email);
+    Mono<Boolean> existsByDoctorEmail(String email);
 
-    Mono<Boolean> existsByDoctor_ExternalId(UUID externalId);
+    Mono<Boolean> existsByDoctorExternalId(UUID externalId);
 
 }

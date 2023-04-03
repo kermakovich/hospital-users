@@ -18,12 +18,12 @@ public class DoctorQueryHandler implements DoctorQueryService {
 
     @Override
     public Mono<Boolean> isExistByEmail(String email) {
-        return doctorRepository.existsByDoctor_Email(email);
+        return doctorRepository.existsByDoctorEmail(email);
     }
 
     @Override
     public Mono<Boolean> isExistByExternalId(UUID externalId) {
-        return doctorRepository.existsByDoctor_ExternalId(externalId);
+        return doctorRepository.existsByDoctorExternalId(externalId);
     }
 
 }

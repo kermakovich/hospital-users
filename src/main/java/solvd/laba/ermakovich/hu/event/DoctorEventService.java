@@ -5,6 +5,6 @@ package solvd.laba.ermakovich.hu.event;
  */
 public interface DoctorEventService {
 
-    void on(Event event);
+    void when(Event event);
 
 }
