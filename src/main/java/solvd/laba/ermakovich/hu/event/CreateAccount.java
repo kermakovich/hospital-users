@@ -9,7 +9,7 @@ import java.util.UUID;
  * @author Ermakovich Kseniya
  */
 @Data
-public class CreateAccount extends Event {
+public class CreateAccount extends IntegrationEvent {
 
     public static final String EVENT_TYPE = "CreateAccount";
     private UUID externalId;
@@ -28,4 +28,5 @@ public class CreateAccount extends Event {
     public String getPayload() {
         return externalId.toString();
     }
+
 }

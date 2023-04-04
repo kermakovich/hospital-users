@@ -10,6 +10,7 @@ import solvd.laba.ermakovich.hu.event.CreateAccount;
 import solvd.laba.ermakovich.hu.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.event.Event;
+import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 import solvd.laba.ermakovich.hu.kafka.KafkaProducer;
 import solvd.laba.ermakovich.hu.query.DoctorQueryService;
 
@@ -37,8 +38,8 @@ public class DoctorCommandHandler implements DoctorCommandService {
                                 command.getDoctor().getEmail() + " already exist");
                     } else {
                         Event createDoctor = new CreateDoctor(command.getAggregateId(), command.getDoctor());
-                        eventService.when(createDoctor);
-                        Event accountEvent = new CreateAccount(command.getDoctor().getExternalId());
+                        eventService.when(createDoctor).subscribe();
+                        IntegrationEvent accountEvent = new CreateAccount(command.getDoctor().getExternalId());
                         kafkaProducer.send(accountEvent);
                         return Mono.just(createDoctor.getAggregateId());
                     }

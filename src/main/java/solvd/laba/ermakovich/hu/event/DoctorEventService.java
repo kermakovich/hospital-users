@@ -1,10 +1,12 @@
 package solvd.laba.ermakovich.hu.event;
 
+import reactor.core.publisher.Mono;
+
 /**
  * @author Ermakovich Kseniya
  */
 public interface DoctorEventService {
 
-    void when(Event event);
+    Mono<Void> when(Event event);
 
 }

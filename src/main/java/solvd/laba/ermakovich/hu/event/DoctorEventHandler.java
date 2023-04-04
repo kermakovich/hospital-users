@@ -3,9 +3,9 @@ package solvd.laba.ermakovich.hu.event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import solvd.laba.ermakovich.hu.aggregate.AggregateService;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
-import solvd.laba.ermakovich.hu.mongo.EventRepository;
+import reactor.core.publisher.Mono;
+import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateService;
+import solvd.laba.ermakovich.hu.mongo.SaveCustom;
 
 /**
  * @author Ermakovich Kseniya
@@ -14,15 +14,17 @@ import solvd.laba.ermakovich.hu.mongo.EventRepository;
 @RequiredArgsConstructor
 public class DoctorEventHandler implements DoctorEventService {
 
-    private final EventRepository eventRepository;
-    private final AggregateService aggregateService;
+    private final SaveCustom<Event> saveCustom;
+    private final DoctorAggregateService doctorAggregateService;
 
     @Override
     @Transactional
-    public void when(Event event) {
-        DoctorAggregate doctor = new DoctorAggregate(event.getAggregateId());
-        aggregateService.apply(doctor, event);
-        eventRepository.save(event).subscribe();
+    public Mono<Void> when(Event event) {
+        return doctorAggregateService.apply(event)
+                .flatMap(doctorAggregate -> {
+                    saveCustom.save(event).subscribe();
+                    return Mono.empty();
+                });
     }
 
 }

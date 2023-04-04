@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
-import solvd.laba.ermakovich.hu.event.Event;
+import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +38,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    KafkaSender<String, Event> kafkaSender() {
-        SenderOptions<String, Event> options = SenderOptions.create(kafkaProducerProperties());
+    KafkaSender<String, IntegrationEvent> kafkaSender() {
+        SenderOptions<String, IntegrationEvent> options = SenderOptions.create(kafkaProducerProperties());
         return KafkaSender.create(options);
     }
 
