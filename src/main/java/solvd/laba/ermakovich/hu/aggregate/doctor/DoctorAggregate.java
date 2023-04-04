@@ -19,6 +19,4 @@ public class DoctorAggregate extends AggregateRoot {
         super(id, AGGREGATE_TYPE);
     }
 
-
-
 }
