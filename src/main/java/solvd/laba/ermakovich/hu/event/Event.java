@@ -1,10 +1,7 @@
 package solvd.laba.ermakovich.hu.event;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,7 +14,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Document("events")
 public abstract class Event {
 
@@ -28,8 +24,13 @@ public abstract class Event {
     private String aggregateId;
     private String eventType;
     private long version;
+
+    @Getter(value=AccessLevel.NONE)
+    @Setter(value=AccessLevel.NONE)
     private String payload;
     private LocalDateTime timeStamp;
+
+    public abstract String getPayload();
 
     protected Event(String eventType, String aggregateId) {
         this.id = UUID.randomUUID().toString();

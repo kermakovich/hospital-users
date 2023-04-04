@@ -1,5 +1,6 @@
 package solvd.laba.ermakovich.hu.event;
 
+import lombok.Data;
 import lombok.SneakyThrows;
 
 import java.util.UUID;
@@ -7,9 +8,11 @@ import java.util.UUID;
 /**
  * @author Ermakovich Kseniya
  */
+@Data
 public class CreateAccount extends Event {
 
     public static final String EVENT_TYPE = "CreateAccount";
+    private UUID externalId;
 
     public CreateAccount() {
         super(EVENT_TYPE);
@@ -18,7 +21,11 @@ public class CreateAccount extends Event {
     @SneakyThrows
     public CreateAccount(UUID externalId) {
         this();
-        this.setPayload(externalId.toString());
+        this.externalId = externalId;
     }
 
+    @Override
+    public String getPayload() {
+        return externalId.toString();
+    }
 }

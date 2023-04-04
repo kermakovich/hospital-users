@@ -15,3 +15,4 @@ mvnw.cmd
 *.ipr
 
 .env
+/mongo/
