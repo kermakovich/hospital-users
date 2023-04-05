@@ -8,6 +8,6 @@ public enum UserRole {
 
     ADMIN,
     PATIENT,
-    DOCTOR;
+    DOCTOR
 
 }

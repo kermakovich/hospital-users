@@ -17,7 +17,7 @@ public class DoctorDto extends UserInfoDto {
     @NotNull(message = "can`t be null", groups = OnCreate.class)
     private Department department;
 
-    @NotNull(message = "can`t be null", groups =  OnCreate.class)
+    @NotNull(message = "can`t be null", groups = OnCreate.class)
     private Specialization specialization;
 
     private Integer cabinet;

@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<ErrorDto> handleValidationException(MethodArgumentNotValidException ex) {
         List<ErrorDto> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach( error -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             FieldError fieldError = (FieldError) error;
             errors.add(new FieldErrorDto(fieldError.getField(), error.getDefaultMessage()));
         });
@@ -39,10 +39,11 @@ public class GlobalExceptionHandler {
         return new ErrorDto(ex.getMessage());
     }
 
-//    @ExceptionHandler({Exception.class})
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ErrorDto handleOtherException(Exception ex) {
-//        log.error(ex.getMessage(), ex.getClass());
-//        return new ErrorDto("something is wrong, please, try later");
-//    }
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorDto handleOtherException(Exception ex) {
+        log.error(ex.getMessage(), ex.getClass());
+        return new ErrorDto("something is wrong, please, try later");
+    }
+
 }
