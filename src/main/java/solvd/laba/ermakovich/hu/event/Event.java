@@ -40,10 +40,6 @@ public abstract class Event {
         this.timeStamp = LocalDateTime.now();
     }
 
-    protected Event(String eventType) {
-        this(eventType, null);
-    }
-
     public abstract String getPayload();
 
     public abstract void copyTo(AggregateRoot aggregate);

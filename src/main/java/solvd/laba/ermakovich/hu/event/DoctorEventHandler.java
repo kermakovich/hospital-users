@@ -2,7 +2,6 @@ package solvd.laba.ermakovich.hu.event;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.mongo.SaveCustom;
@@ -18,7 +17,6 @@ public class DoctorEventHandler implements DoctorEventService {
     private final DoctorAggregateService doctorAggregateService;
 
     @Override
-    @Transactional
     public Mono<Void> when(Event event) {
         return doctorAggregateService.apply(event)
                 .flatMap(doctorAggregate -> {
