@@ -1,9 +1,8 @@
 package solvd.laba.ermakovich.hu.event;
 
+import java.util.UUID;
 import lombok.Data;
 import lombok.SneakyThrows;
-
-import java.util.UUID;
 
 /**
  * @author Ermakovich Kseniya
@@ -19,14 +18,17 @@ public class CreateAccount extends IntegrationEvent {
     }
 
     @SneakyThrows
-    public CreateAccount(UUID externalId) {
+    public CreateAccount(UUID externalId, String aggregateId) {
         this();
         this.externalId = externalId;
+        this.setAggregateId(aggregateId);
     }
 
+    @SneakyThrows
     @Override
     public String getPayload() {
         return externalId.toString();
     }
 
 }
+

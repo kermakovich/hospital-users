@@ -7,6 +7,6 @@ import reactor.core.publisher.Mono;
  */
 public interface DoctorCommandService {
 
-    Mono<String> handle(CreateDoctorCommand command);
+    Mono<Void> handle(CreateDoctorCommand command);
 
 }

@@ -15,6 +15,7 @@ public abstract class AggregateRoot {
     @Id
     protected String id;
     protected String type;
+    protected AggregateStatus status;
 
     @Version
     protected long version;
@@ -22,6 +23,11 @@ public abstract class AggregateRoot {
     protected AggregateRoot(final String id, final String aggregateType) {
         this.id = id;
         this.type = aggregateType;
+    }
+
+    protected AggregateRoot(String id, String aggregateType, AggregateStatus status) {
+        this(id, aggregateType);
+        this.status = status;
     }
 
 }

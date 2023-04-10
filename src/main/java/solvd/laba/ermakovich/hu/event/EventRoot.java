@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author Ermakovich Kseniya
@@ -13,17 +16,23 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document("events")
 @SuperBuilder
-public class IntegrationEvent {
+public abstract class EventRoot {
 
+    @Id
     private String id;
+    private String aggregateId;
     private String eventType;
+
+    @Version
+    private long version;
     private String payload;
     private LocalDateTime timeStamp;
-    private String aggregateId;
 
-    protected IntegrationEvent(String eventType) {
+    protected EventRoot(String eventType, String aggregateId) {
         this.id = UUID.randomUUID().toString();
+        this.aggregateId = aggregateId;
         this.eventType = eventType;
         this.timeStamp = LocalDateTime.now();
     }

@@ -10,7 +10,6 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import reactor.kafka.receiver.KafkaReceiver;
 import reactor.kafka.receiver.ReceiverOptions;
@@ -25,7 +24,6 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 public class KafkaConsumerConfig {
 
     private static final String TOPIC_KEY = "topic";
-    private final ResourceLoader resourceLoader;
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
