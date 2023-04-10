@@ -43,7 +43,7 @@ public class KafkaConsumerConfig {
                 false);
         kafkaPropertiesMap.put(JsonDeserializer.VALUE_DEFAULT_TYPE,
                 IntegrationEvent.class);
-        kafkaPropertiesMap.put(TOPIC_KEY, "saga");
+        kafkaPropertiesMap.put(TOPIC_KEY, "account_events");
         return kafkaPropertiesMap;
     }
 

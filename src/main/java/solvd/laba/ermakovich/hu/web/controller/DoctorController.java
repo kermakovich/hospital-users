@@ -37,10 +37,10 @@ public class DoctorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Void> create(@Validated({OnCreate.class, Default.class})
+    public void create(@Validated({OnCreate.class, Default.class})
                                      @RequestBody DoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
-        return commandService.handle(new CreateDoctorCommand(doctor));
+        commandService.handle(new CreateDoctorCommand(doctor));
     }
 
     @GetMapping
