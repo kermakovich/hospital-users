@@ -14,9 +14,9 @@ spring:
   jackson:
     default-property-inclusion: NON_NULL
   kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVERS}
     producer:
-      bootstrap-servers: ${BOOTSTRAP_SERVERS}
-    topic: finance
+      topic: finance
 eureka:
   client:
     serviceUrl:

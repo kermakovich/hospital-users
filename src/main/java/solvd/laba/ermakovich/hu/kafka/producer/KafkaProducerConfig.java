@@ -1,5 +1,7 @@
-package solvd.laba.ermakovich.hu.kafka;
+package solvd.laba.ermakovich.hu.kafka.producer;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,19 +16,16 @@ import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
 import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Ermakovich Kseniya
  */
 @Configuration
 public class KafkaProducerConfig {
 
-    @Value("${spring.kafka.producer.bootstrap-servers}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${spring.kafka.topic}")
+    @Value("${spring.kafka.producer.topic}")
     private String topic;
 
     protected Map<String, Object> kafkaProducerProperties() {

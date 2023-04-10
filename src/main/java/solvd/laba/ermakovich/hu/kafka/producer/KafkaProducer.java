@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.kafka;
+package solvd.laba.ermakovich.hu.kafka.producer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

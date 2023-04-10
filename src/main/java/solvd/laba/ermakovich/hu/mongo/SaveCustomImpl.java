@@ -4,22 +4,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.event.Event;
+import solvd.laba.ermakovich.hu.event.EventRoot;
 
 /**
  * @author Ermakovich Kseniya
  */
 @Service
 @RequiredArgsConstructor
-public class SaveCustomImpl implements SaveCustom<Event> {
+public class SaveCustomImpl implements SaveCustom<EventRoot> {
 
     private final ReactiveMongoTemplate reactiveMongoTemplate;
 
-    public Mono<Event> save(Event event) {
-        final String payload = event.getPayload();
-        event.setPayload(payload);
-        reactiveMongoTemplate.save(event).subscribe();
-        return Mono.empty();
+    public Mono<EventRoot> save(EventRoot eventRoot) {
+        final String payload = eventRoot.getPayload();
+        eventRoot.setPayload(payload);
+        return reactiveMongoTemplate.save(eventRoot);
     }
 
 }

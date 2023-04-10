@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.SneakyThrows;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Transient;
 import solvd.laba.ermakovich.hu.aggregate.AggregateRoot;
 import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
@@ -14,7 +15,8 @@ import solvd.laba.ermakovich.hu.domain.Doctor;
  */
 @Data
 @AllArgsConstructor
-public class CreateDoctor extends Event {
+@SuperBuilder
+public class CreateDoctor extends EventRoot implements Event {
 
     public static final String EVENT_TYPE = "CreateDoctor";
 
