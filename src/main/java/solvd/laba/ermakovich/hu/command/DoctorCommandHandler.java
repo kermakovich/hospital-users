@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
 import solvd.laba.ermakovich.hu.event.CreateAccount;
@@ -29,13 +30,13 @@ public class DoctorCommandHandler implements DoctorCommandService {
 
     @Override
     @SneakyThrows
-    public void handle(CreateDoctorCommand command) {
+    public Mono<Void> handle(CreateDoctorCommand command) {
         command.getDoctor().setPassword(
                 bCryptPasswordEncoder.encode(
                         command.getDoctor().getPassword()
                 )
         );
-        queryService.isExistByEmail(command.getDoctor().getEmail())
+         return queryService.isExistByEmail(command.getDoctor().getEmail())
                 .flatMap(isExist -> {
                     if (Boolean.TRUE.equals(isExist)) {
                         throw new ResourceAlreadyExistsException("User with this email: " +
@@ -45,9 +46,9 @@ public class DoctorCommandHandler implements DoctorCommandService {
                         eventService.create(createDoctor);
                         IntegrationEvent accountEvent = new CreateAccount(command.getDoctor().getExternalId(), command.getAggregateId());
                         kafkaProducer.send(accountEvent);
-                        return aggregateService.applyCreateOperation(createDoctor);
+                        return aggregateService.applyCreateOperation(createDoctor).then();
                     }
-                }).subscribe();
+                });
     }
 
 }

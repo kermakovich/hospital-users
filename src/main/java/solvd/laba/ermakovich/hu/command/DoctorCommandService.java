@@ -1,10 +1,12 @@
 package solvd.laba.ermakovich.hu.command;
 
+import reactor.core.publisher.Mono;
+
 /**
  * @author Ermakovich Kseniya
  */
 public interface DoctorCommandService {
 
-    void handle(CreateDoctorCommand command);
+    Mono<Void> handle(CreateDoctorCommand command);
 
 }
