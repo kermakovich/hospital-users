@@ -26,7 +26,7 @@ import solvd.laba.ermakovich.hu.web.mapper.DoctorMapper;
  * @author Ermakovich Kseniya
  */
 @RestController
-@RequestMapping("api/v1/doctors")
+@RequestMapping("users-api/v1/doctors")
 @RequiredArgsConstructor
 @Slf4j
 public class DoctorController {
