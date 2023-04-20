@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-users
+  template:
+    metadata:
+      labels:
+        app: hospital-users
+    spec:
+      serviceAccountName: hospital-users-serviceaccount
+      containers:
+        - name: hospital-users
+          image: kermakovich/hospital-users
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: BOOTSTRAP_SERVERS
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: SERVER_PORT
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: MONGO_HOST
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: MONGO_PORT
+            - name: MONGO_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-users-configmap
+                  key: MONGO_DB
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secrets
+                  key: MONGO_USERNAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secrets
+                  key: MONGO_PASSWORD
