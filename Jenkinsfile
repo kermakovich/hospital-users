@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'jenkins', url: 'https://github.com/kermakovich/hospital-users.git'
+                git branch: 'master', url: 'https://github.com/kermakovich/hospital-users.git'
             }
         }
         stage('Maven build') {
