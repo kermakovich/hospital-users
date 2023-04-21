@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: hospital-users-service
 spec:
-  type: NodePort
   selector:
     app: hospital-users
   ports:
