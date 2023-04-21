@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hu-mongo-initdb-config
+data:
+  init-mongo.js: |
+    db = new Mongo().getDB("hospital-users");
+    db.createCollection("doctors", { capped: false });
