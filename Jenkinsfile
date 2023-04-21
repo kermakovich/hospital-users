@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/kermakovich/hospital-users.git'
+                git branch: 'jenkins', url: 'https://github.com/kermakovich/hospital-users.git'
             }
         }
         stage('Maven build') {
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
-                    sh 'cd ../infra'
+                    sh 'cd infra'
                     sh 'kubectl apply -f configmap.yml'
                     sh 'kubectl apply -f deployment.yml'
                     sh 'kubectl apply -f service.yml'
