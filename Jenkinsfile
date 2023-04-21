@@ -33,10 +33,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
-                    sh 'kubectl apply -f infra/configmap.yml'
-                    sh 'kubectl apply -f infra/deployment.yml'
-                    sh 'kubectl apply -f infra/service.yml'
-                    sh 'kubectl apply -f infra/service-account.yml'
+                    sh 'cd ../infra'
+                    sh 'kubectl apply -f configmap.yml'
+                    sh 'kubectl apply -f deployment.yml'
+                    sh 'kubectl apply -f service.yml'
+                    sh 'kubectl apply -f service-account.yml'
                 }
             }
         }
