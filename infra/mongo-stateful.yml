@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hu-mongo
+spec:
+  serviceName: hu-mongo-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hu-mongo
+  template:
+    metadata:
+      labels:
+        app: hu-mongo
+    spec:
+      containers:
+        - name: hospital-users-mg
+          image: mongo:5.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hu-mongo-secrets
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hu-mongo-secrets
+                  key: MONGO_INITDB_ROOT_PASSWORD
+          volumeMounts:
+            - name: mongo-initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mongo-initdb
+          configMap:
+            name: hu-mongo-initdb-config
+        - name: mongo-hu-db-disk
+          hostPath:
+            path: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-hu-db-disk
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
