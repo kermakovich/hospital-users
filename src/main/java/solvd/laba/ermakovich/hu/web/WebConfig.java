@@ -23,7 +23,7 @@ import java.util.Locale;
  * @author Ermakovich Kseniya
  */
 @Configuration
-public final class WebConfig {
+public class WebConfig {
 
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";

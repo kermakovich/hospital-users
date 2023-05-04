@@ -20,7 +20,7 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
  * @author Ermakovich Kseniya
  */
 @Configuration
-public final class KafkaProducerConfig {
+public class KafkaProducerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
