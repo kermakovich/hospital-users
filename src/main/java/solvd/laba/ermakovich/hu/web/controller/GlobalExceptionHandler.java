@@ -20,28 +20,36 @@ import java.util.List;
  */
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public final class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<ErrorDto> handleValidationException(MethodArgumentNotValidException ex) {
+    public List<ErrorDto> handleValidationException(
+            final MethodArgumentNotValidException ex
+    ) {
         List<ErrorDto> errors = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             FieldError fieldError = (FieldError) error;
-            errors.add(new FieldErrorDto(fieldError.getField(), error.getDefaultMessage()));
+            errors.add(
+                    new FieldErrorDto(fieldError.getField(),
+                            error.getDefaultMessage())
+            );
         });
         return errors;
     }
 
-    @ExceptionHandler({IllegalOperationException.class, ResourceAlreadyExistsException.class})
+    @ExceptionHandler({IllegalOperationException.class,
+            ResourceAlreadyExistsException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto handleEntityAlreadyExistsException(RuntimeException ex) {
+    public ErrorDto handleEntityAlreadyExistsException(
+            final RuntimeException ex
+    ) {
         return new ErrorDto(ex.getMessage());
     }
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorDto handleOtherException(Exception ex) {
+    public ErrorDto handleOtherException(final Exception ex) {
         log.error(ex.getMessage(), ex.getClass());
         return new ErrorDto("something is wrong, please, try later");
     }

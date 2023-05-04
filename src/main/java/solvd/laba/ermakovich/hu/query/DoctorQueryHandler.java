@@ -14,33 +14,41 @@ import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
  */
 @Service
 @RequiredArgsConstructor
-public class DoctorQueryHandler implements DoctorQueryService {
+public final class DoctorQueryHandler implements DoctorQueryService {
 
     private final DoctorRepository doctorRepository;
 
     @Override
-    public Mono<Boolean> isExistByEmail(String email) {
+    public Mono<Boolean> isExistByEmail(final String email) {
         return doctorRepository.existsByDoctorEmail(email);
     }
 
     @Override
-    public Mono<Boolean> isExistByExternalId(UUID externalId) {
+    public Mono<Boolean> isExistByExternalId(final UUID externalId) {
         return doctorRepository.existsByDoctorExternalId(externalId);
     }
 
     @Override
-    public Mono<DoctorAggregate> findByIdOrCreate(String aggregateId) {
+    public Mono<DoctorAggregate> findByIdOrCreate(final String aggregateId) {
         return doctorRepository.findById(aggregateId)
                 .switchIfEmpty(
-                        Mono.just(new DoctorAggregate(aggregateId, AggregateStatus.PENDING))
+                        Mono.just(
+                                new DoctorAggregate(
+                                        aggregateId,
+                                        AggregateStatus.PENDING
+                                )
+                        )
                 );
     }
 
     @Override
-    public Mono<DoctorAggregate> findById(String aggregateId) {
+    public Mono<DoctorAggregate> findById(final String aggregateId) {
         return doctorRepository.findById(aggregateId)
                 .switchIfEmpty(
-                        Mono.error(new ResourceDoesNotExistException("doctor aggregate does not exist"))
+                        Mono.error(
+                                new ResourceDoesNotExistException(
+                                        "doctor aggregate does not exist")
+                        )
                 );
     }
 

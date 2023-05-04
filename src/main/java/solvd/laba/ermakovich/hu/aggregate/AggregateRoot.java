@@ -13,19 +13,20 @@ import org.springframework.data.annotation.Version;
 public abstract class AggregateRoot {
 
     @Id
-    protected String id;
-    protected String type;
-    protected AggregateStatus status;
+    private String id;
+    private String type;
+    private AggregateStatus status;
 
     @Version
-    protected long version;
+    private long version;
 
     protected AggregateRoot(final String id, final String aggregateType) {
         this.id = id;
         this.type = aggregateType;
     }
 
-    protected AggregateRoot(String id, String aggregateType, AggregateStatus status) {
+    protected AggregateRoot(final String id, final String aggregateType,
+                            final AggregateStatus status) {
         this(id, aggregateType);
         this.status = status;
     }

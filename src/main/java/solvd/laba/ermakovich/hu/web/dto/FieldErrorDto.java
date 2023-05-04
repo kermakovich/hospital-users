@@ -7,7 +7,7 @@ public class FieldErrorDto extends ErrorDto {
 
     private final String fieldName;
 
-    public FieldErrorDto(String fieldName, String message) {
+    public FieldErrorDto(final String fieldName, final String message) {
         super(message);
         this.fieldName = fieldName;
     }

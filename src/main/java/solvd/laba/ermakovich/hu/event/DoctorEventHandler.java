@@ -9,12 +9,12 @@ import solvd.laba.ermakovich.hu.mongo.SaveCustom;
  */
 @Service
 @RequiredArgsConstructor
-public class DoctorEventHandler implements DoctorEventService {
+public final class DoctorEventHandler implements DoctorEventService {
 
     private final SaveCustom<EventRoot> saveCustom;
 
     @Override
-    public void create(EventRoot eventRoot) {
+    public void create(final EventRoot eventRoot) {
          saveCustom.save(eventRoot).subscribe();
     }
 

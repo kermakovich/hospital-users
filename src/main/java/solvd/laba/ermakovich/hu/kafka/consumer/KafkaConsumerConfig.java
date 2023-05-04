@@ -21,7 +21,7 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class KafkaConsumerConfig {
+public final class KafkaConsumerConfig {
 
     private static final String TOPIC_KEY = "topic";
 
@@ -29,7 +29,7 @@ public class KafkaConsumerConfig {
     private String bootstrapServers;
 
 
-    protected Map<String, Object> kafkaConsumerProperties() {
+    private Map<String, Object> kafkaConsumerProperties() {
         Map<String, Object> kafkaPropertiesMap = new HashMap<>(7);
         kafkaPropertiesMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapServers);
@@ -50,14 +50,18 @@ public class KafkaConsumerConfig {
     @Bean
     public ReceiverOptions<String, IntegrationEvent> kafkaReceiverOptions() {
         var properties = kafkaConsumerProperties();
-        ReceiverOptions<String, IntegrationEvent> options = ReceiverOptions.create(properties);
+        ReceiverOptions<String, IntegrationEvent> options
+                = ReceiverOptions.create(properties);
         return options.subscription(
                         (Collections.singletonList(
                                 (String) properties.get(TOPIC_KEY)
                         )))
-                .addAssignListener(receiverPartitions -> log.debug("assign consumer {}", receiverPartitions))
-                .addRevokeListener(receiverPartitions -> log.debug("revoke consumer {}", receiverPartitions));
-
+                .addAssignListener(receiverPartitions ->
+                        log.debug("assign consumer {}", receiverPartitions)
+                )
+                .addRevokeListener(receiverPartitions ->
+                        log.debug("revoke consumer {}", receiverPartitions)
+                );
     }
 
     @Bean

@@ -9,7 +9,8 @@ import java.util.UUID;
 /**
  * @author Ermakovich Kseniya
  */
-public interface DoctorRepository extends ReactiveMongoRepository<DoctorAggregate, String> {
+public interface DoctorRepository
+        extends ReactiveMongoRepository<DoctorAggregate, String> {
 
     Mono<Boolean> existsByDoctorEmail(String email);
 

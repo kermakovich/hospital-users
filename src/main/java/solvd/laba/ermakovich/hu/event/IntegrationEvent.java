@@ -22,7 +22,7 @@ public class IntegrationEvent {
     private LocalDateTime timeStamp;
     private String aggregateId;
 
-    protected IntegrationEvent(String eventType) {
+    protected IntegrationEvent(final String eventType) {
         this.id = UUID.randomUUID().toString();
         this.eventType = eventType;
         this.timeStamp = LocalDateTime.now();

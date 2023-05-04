@@ -14,25 +14,30 @@ import solvd.laba.ermakovich.hu.query.DoctorQueryService;
  */
 @Service
 @RequiredArgsConstructor
-public class DoctorAggregateServiceImpl implements DoctorAggregateService {
+public final class DoctorAggregateServiceImpl
+        implements DoctorAggregateService {
 
     private final DoctorRepository doctorRepository;
     private final DoctorQueryService doctorQueryService;
 
     @Override
-    public Mono<DoctorAggregate> apply(EventRoot eventRoot) {
+    public Mono<DoctorAggregate> apply(final EventRoot eventRoot) {
         return doctorQueryService.findById(eventRoot.getAggregateId())
                 .flatMap(aggregate -> {
-                    ((Event)eventRoot).copyTo(aggregate);
+                    ((Event) eventRoot).copyTo(aggregate);
                     return doctorRepository.save(aggregate);
                 });
     }
 
     @Override
-    public Mono<DoctorAggregate> applyCreateOperation(EventRoot eventRoot) {
-        return doctorQueryService.findByIdOrCreate(eventRoot.getAggregateId())
+    public Mono<DoctorAggregate> applyCreateOperation(
+            final EventRoot eventRoot
+    ) {
+        return doctorQueryService.findByIdOrCreate(
+                eventRoot.getAggregateId()
+                )
                 .flatMap(aggregate -> {
-                    ((Event)eventRoot).copyTo(aggregate);
+                    ((Event) eventRoot).copyTo(aggregate);
                     return doctorRepository.save(aggregate);
                 });
     }

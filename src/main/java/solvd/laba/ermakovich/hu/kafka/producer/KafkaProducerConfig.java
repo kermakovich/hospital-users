@@ -20,7 +20,7 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
  * @author Ermakovich Kseniya
  */
 @Configuration
-public class KafkaProducerConfig {
+public final class KafkaProducerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
@@ -28,24 +28,31 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.producer.topic}")
     private String topic;
 
-    protected Map<String, Object> kafkaProducerProperties() {
+    private Map<String, Object> kafkaProducerProperties() {
         Map<String, Object> kafkaPropertiesMap = new HashMap<>(3);
-        kafkaPropertiesMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        kafkaPropertiesMap.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        kafkaPropertiesMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        kafkaPropertiesMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                bootstrapServers);
+        kafkaPropertiesMap.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                StringSerializer.class);
+        kafkaPropertiesMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                JsonSerializer.class);
         return kafkaPropertiesMap;
     }
 
     @Bean
     KafkaSender<String, IntegrationEvent> kafkaSender() {
-        SenderOptions<String, IntegrationEvent> options = SenderOptions.create(kafkaProducerProperties());
+        SenderOptions<String, IntegrationEvent> options = SenderOptions
+                .create(kafkaProducerProperties());
         return KafkaSender.create(options);
     }
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configs.put(
+                AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG,
+                bootstrapServers
+        );
         return new KafkaAdmin(configs);
     }
 
