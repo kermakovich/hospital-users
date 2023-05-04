@@ -21,7 +21,7 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public final class KafkaConsumerConfig {
+public class KafkaConsumerConfig {
 
     private static final String TOPIC_KEY = "topic";
 
