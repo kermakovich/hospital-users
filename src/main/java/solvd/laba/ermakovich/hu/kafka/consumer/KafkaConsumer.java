@@ -14,7 +14,7 @@ import solvd.laba.ermakovich.hu.event.kafka.CreateAccountService;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class KafkaConsumer {
+public final class KafkaConsumer {
 
     private final KafkaReceiver<String, IntegrationEvent> receiver;
     private final CreateAccountService createAccountService;

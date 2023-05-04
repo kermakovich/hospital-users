@@ -33,11 +33,13 @@ public abstract class UserInfoDto {
     private String name;
 
     @NotBlank(groups = OnCreate.class, message = "can`t be empty")
-    @Size(min = 1, max = 35, message = "length should be in 1..35", groups = OnCreate.class)
+    @Size(min = 1, max = 35, message = "length should be in 1..35",
+            groups = OnCreate.class)
     private String surname;
 
     @NotBlank(groups = OnCreate.class, message = "can`t be empty")
-    @Size(min = 1, max = 35, message = "length should be in 1..35", groups = OnCreate.class)
+    @Size(min = 1, max = 35, message = "length should be in 1..35",
+            groups = OnCreate.class)
     private String fatherhood;
 
     @NotNull(groups = OnCreate.class, message = "can`t be null")
@@ -45,11 +47,13 @@ public abstract class UserInfoDto {
     private LocalDate birthday;
 
     @NotBlank(groups = OnCreate.class, message = "can`t be empty")
-    @Size(min = 3, max = 320, groups = OnCreate.class, message = "length should be in 3..320")
+    @Size(min = 3, max = 320, message = "length should be in 3..320",
+            groups = OnCreate.class)
     private String email;
 
     @NotBlank(groups = OnCreate.class, message = "can`t be empty")
-    @Size(min = 4, max = 20, groups = OnCreate.class, message = "length should be in 4..20")
+    @Size(min = 4, max = 20, message = "length should be in 4..20",
+            groups = OnCreate.class)
     private String password;
 
     @NotNull(groups = OnCreate.class, message = "can`t be null")

@@ -5,7 +5,7 @@ package solvd.laba.ermakovich.hu.domain.exception;
  */
 public class ResourceAlreadyExistsException extends RuntimeException {
 
-    public ResourceAlreadyExistsException(String message) {
+    public ResourceAlreadyExistsException(final String message) {
         super(message);
     }
 

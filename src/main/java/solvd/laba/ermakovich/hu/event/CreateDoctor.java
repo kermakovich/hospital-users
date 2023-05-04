@@ -16,18 +16,18 @@ import solvd.laba.ermakovich.hu.domain.Doctor;
 @Data
 @AllArgsConstructor
 @SuperBuilder
-public class CreateDoctor extends EventRoot implements Event {
+public final class CreateDoctor extends EventRoot implements Event {
 
     public static final String EVENT_TYPE = "CreateDoctor";
 
     @Transient
     private Doctor doctor;
 
-    public CreateDoctor(String aggregateId) {
+    public CreateDoctor(final String aggregateId) {
         super(EVENT_TYPE, aggregateId);
     }
 
-    public CreateDoctor(String aggregateId, Doctor doctor) {
+    public CreateDoctor(final String aggregateId, final Doctor doctor) {
         this(aggregateId);
         this.doctor = doctor;
     }
@@ -40,7 +40,7 @@ public class CreateDoctor extends EventRoot implements Event {
 
     @SneakyThrows
     @Override
-    public void copyTo(AggregateRoot aggregate) {
+    public void copyTo(final AggregateRoot aggregate) {
         ((DoctorAggregate) aggregate).setDoctor(new ObjectMapper()
                 .readValue(getPayload(), Doctor.class));
     }

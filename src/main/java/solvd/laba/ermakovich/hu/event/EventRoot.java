@@ -30,7 +30,7 @@ public abstract class EventRoot {
     private String payload;
     private LocalDateTime timeStamp;
 
-    protected EventRoot(String eventType, String aggregateId) {
+    protected EventRoot(final String eventType, final String aggregateId) {
         this.id = UUID.randomUUID().toString();
         this.aggregateId = aggregateId;
         this.eventType = eventType;

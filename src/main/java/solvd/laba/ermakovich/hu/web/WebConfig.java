@@ -23,7 +23,7 @@ import java.util.Locale;
  * @author Ermakovich Kseniya
  */
 @Configuration
-public class WebConfig {
+public final class WebConfig {
 
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
@@ -31,14 +31,38 @@ public class WebConfig {
 
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+    public Jackson2ObjectMapperBuilderCustomizer mapper() {
         return builder -> builder.simpleDateFormat(DATE_TIME_FORMAT)
-                .serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_FORMAT)))
-                .deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DATE_FORMAT)))
-                .serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)))
-                .deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)))
-                .serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(TIME_FORMAT)))
-                .deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(TIME_FORMAT)));
+                .serializerByType(LocalDate.class,
+                        new LocalDateSerializer(
+                                DateTimeFormatter.ofPattern(DATE_FORMAT)
+                        )
+                )
+                .deserializerByType(LocalDate.class,
+                        new LocalDateDeserializer(
+                                DateTimeFormatter.ofPattern(DATE_FORMAT)
+                        )
+                )
+                .serializerByType(LocalDateTime.class,
+                        new LocalDateTimeSerializer(
+                                DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)
+                        )
+                )
+                .deserializerByType(LocalDateTime.class,
+                        new LocalDateTimeDeserializer(
+                                DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)
+                        )
+                )
+                .serializerByType(LocalTime.class,
+                        new LocalTimeSerializer(
+                                DateTimeFormatter.ofPattern(TIME_FORMAT)
+                        )
+                )
+                .deserializerByType(LocalTime.class,
+                        new LocalTimeDeserializer(
+                                DateTimeFormatter.ofPattern(TIME_FORMAT)
+                        )
+                );
     }
 
     @Bean
@@ -46,13 +70,17 @@ public class WebConfig {
         return new Formatter<>() {
 
             @Override
-            public LocalDate parse(@NonNull String text, @NonNull Locale locale) {
-                return LocalDate.parse(text, DateTimeFormatter.ofPattern(DATE_FORMAT));
+            public LocalDate parse(@NonNull final String text,
+                                   @NonNull final Locale locale) {
+                return LocalDate.parse(text,
+                        DateTimeFormatter.ofPattern(DATE_FORMAT)
+                );
             }
 
             @Override
-            public String print(LocalDate object, Locale locale) {
-                return DateTimeFormatter.ofPattern(DATE_FORMAT).format(object);
+            public String print(final LocalDate object, final Locale locale) {
+                return DateTimeFormatter.ofPattern(DATE_FORMAT)
+                        .format(object);
             }
         };
     }

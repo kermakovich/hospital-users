@@ -8,7 +8,7 @@ import lombok.SneakyThrows;
  * @author Ermakovich Kseniya
  */
 @Data
-public class CreateAccount extends IntegrationEvent {
+public final class CreateAccount extends IntegrationEvent {
 
     public static final String EVENT_TYPE = "CreateAccount";
     private UUID externalId;
@@ -18,7 +18,7 @@ public class CreateAccount extends IntegrationEvent {
     }
 
     @SneakyThrows
-    public CreateAccount(UUID externalId, String aggregateId) {
+    public CreateAccount(final UUID externalId, final String aggregateId) {
         this();
         this.externalId = externalId;
         this.setAggregateId(aggregateId);

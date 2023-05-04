@@ -15,28 +15,34 @@ import solvd.laba.ermakovich.hu.event.UpdateDoctor;
  */
 @Service
 @RequiredArgsConstructor
-public class KafkaCreateAccountHandler implements CreateAccountService {
+public final class KafkaCreateAccountHandler
+        implements CreateAccountService {
 
     private final DoctorAggregateService aggregateService;
     private final DoctorEventService eventService;
 
     @Override
-    public EventRoot succeed(IntegrationEvent integrationEvent) {
-        return new UpdateDoctor(integrationEvent.getAggregateId(), AggregateStatus.APPROVED);
+    public EventRoot succeed(final IntegrationEvent integrationEvent) {
+        return new UpdateDoctor(
+                integrationEvent.getAggregateId(),
+                AggregateStatus.APPROVED
+        );
     }
 
     @Override
-    public EventRoot failed(IntegrationEvent integrationEvent) {
+    public EventRoot failed(final IntegrationEvent integrationEvent) {
         return new UpdateDoctor(integrationEvent.getAggregateId(),
                 AggregateStatus.REJECTED);
     }
 
     @Override
-    public void when(IntegrationEvent value) {
+    public void when(final IntegrationEvent value) {
         var event = switch (value.getEventType()) {
             case "createAccountCompleted" -> succeed(value);
             case "createAccountRejected" -> failed(value);
-            default -> throw new IllegalOperationException("Unexpected or wrong event status");
+            default -> throw new IllegalOperationException(
+                    "Unexpected or wrong event status"
+            );
         };
         eventService.create(event);
         aggregateService.apply(event).subscribe();

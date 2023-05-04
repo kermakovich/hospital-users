@@ -16,7 +16,7 @@ public class DoctorAggregate extends AggregateRoot {
     public static final String AGGREGATE_TYPE = "Doctor";
     private Doctor doctor;
 
-    public DoctorAggregate(String id, AggregateStatus status) {
+    public DoctorAggregate(final String id, final AggregateStatus status) {
         super(id, AGGREGATE_TYPE, status);
     }
 

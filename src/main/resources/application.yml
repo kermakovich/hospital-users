@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: hospital-users
+  elasticsearch:
+    uris: http://localhost:9200
+#    socket-timeout: 10s
+#    password: ChBbZT+-GTXrBGeS*KZO
+#    username: elastic
   data:
     mongodb:
       authentication-database: admin

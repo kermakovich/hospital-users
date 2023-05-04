@@ -20,7 +20,7 @@ import solvd.laba.ermakovich.hu.query.DoctorQueryService;
  */
 @Service
 @RequiredArgsConstructor
-public class DoctorCommandHandler implements DoctorCommandService {
+public final class DoctorCommandHandler implements DoctorCommandService {
 
     private final DoctorEventService eventService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -30,7 +30,7 @@ public class DoctorCommandHandler implements DoctorCommandService {
 
     @Override
     @SneakyThrows
-    public Mono<Void> handle(CreateDoctorCommand command) {
+    public Mono<Void> handle(final CreateDoctorCommand command) {
         command.getDoctor().setPassword(
                 bCryptPasswordEncoder.encode(
                         command.getDoctor().getPassword()
@@ -39,14 +39,25 @@ public class DoctorCommandHandler implements DoctorCommandService {
          return queryService.isExistByEmail(command.getDoctor().getEmail())
                 .flatMap(isExist -> {
                     if (Boolean.TRUE.equals(isExist)) {
-                        throw new ResourceAlreadyExistsException("User with this email: " +
-                                command.getDoctor().getEmail() + " already exist");
+                        throw new ResourceAlreadyExistsException(
+                                "User with this email: "
+                                        + command.getDoctor().getEmail()
+                                        + " already exist"
+                        );
                     } else {
-                        EventRoot createDoctor = new CreateDoctor(command.getAggregateId(), command.getDoctor());
+                        EventRoot createDoctor = new CreateDoctor(
+                                command.getAggregateId(), command.getDoctor()
+                        );
                         eventService.create(createDoctor);
-                        IntegrationEvent accountEvent = new CreateAccount(command.getDoctor().getExternalId(), command.getAggregateId());
+                        IntegrationEvent accountEvent = new CreateAccount(
+                                command.getDoctor().getExternalId(),
+                                command.getAggregateId()
+                        );
                         kafkaProducer.send(accountEvent);
-                        return aggregateService.applyCreateOperation(createDoctor).then();
+                        return aggregateService.applyCreateOperation(
+                                createDoctor
+                                )
+                                .then();
                     }
                 });
     }

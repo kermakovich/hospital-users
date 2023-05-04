@@ -12,7 +12,7 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
  */
 @RequiredArgsConstructor
 @Component
-public class KafkaProducer {
+public final class KafkaProducer {
 
     private final KafkaSender<String, IntegrationEvent> sender;
 

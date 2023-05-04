@@ -11,11 +11,11 @@ import solvd.laba.ermakovich.hu.event.EventRoot;
  */
 @Service
 @RequiredArgsConstructor
-public class SaveCustomImpl implements SaveCustom<EventRoot> {
+public final class SaveCustomImpl implements SaveCustom<EventRoot> {
 
     private final ReactiveMongoTemplate reactiveMongoTemplate;
 
-    public Mono<EventRoot> save(EventRoot eventRoot) {
+    public Mono<EventRoot> save(final EventRoot eventRoot) {
         final String payload = eventRoot.getPayload();
         eventRoot.setPayload(payload);
         return reactiveMongoTemplate.save(eventRoot);

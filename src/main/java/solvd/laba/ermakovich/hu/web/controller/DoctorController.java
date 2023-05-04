@@ -29,7 +29,7 @@ import solvd.laba.ermakovich.hu.web.mapper.DoctorMapper;
 @RequestMapping("users-api/v1/doctors")
 @RequiredArgsConstructor
 @Slf4j
-public class DoctorController {
+public final class DoctorController {
 
     private final DoctorMapper doctorMapper;
     private final DoctorCommandService commandService;
@@ -38,13 +38,15 @@ public class DoctorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Void> create(@Validated({OnCreate.class, Default.class})
-                                     @RequestBody DoctorDto doctorDto) {
+                                     @RequestBody final DoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
         return commandService.handle(new CreateDoctorCommand(doctor));
     }
 
     @GetMapping
-    public Mono<Boolean> isExistByExternalId(@RequestParam UUID externalId) {
+    public Mono<Boolean> isExistByExternalId(
+            @RequestParam final UUID externalId
+    ) {
         return queryService.isExistByExternalId(externalId);
     }
 
