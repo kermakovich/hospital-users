@@ -9,4 +9,6 @@ public interface DoctorCommandService {
 
     Mono<Void> handle(CreateDoctorCommand command);
 
+    Mono<Void> handle(DeleteDoctorCommand command);
+
 }

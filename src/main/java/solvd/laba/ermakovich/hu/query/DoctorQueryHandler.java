@@ -3,10 +3,12 @@ package solvd.laba.ermakovich.hu.query;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
-import solvd.laba.ermakovich.hu.domain.exception.ResourceDoesNotExistException;
 import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.domain.Doctor;
+import solvd.laba.ermakovich.hu.elastic.ElasticDoctorRepository;
 import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
 
 /**
@@ -17,15 +19,16 @@ import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
 public final class DoctorQueryHandler implements DoctorQueryService {
 
     private final DoctorRepository doctorRepository;
+    private final ElasticDoctorRepository elasticDoctorRepository;
 
     @Override
     public Mono<Boolean> isExistByEmail(final String email) {
-        return doctorRepository.existsByDoctorEmail(email);
+        return elasticDoctorRepository.existsByEmail(email);
     }
 
     @Override
-    public Mono<Boolean> isExistByExternalId(final UUID externalId) {
-        return doctorRepository.existsByDoctorExternalId(externalId);
+    public Mono<DoctorAggregate> findByExternalId(final UUID externalId) {
+        return doctorRepository.findByDoctorExternalId(externalId);
     }
 
     @Override
@@ -42,14 +45,8 @@ public final class DoctorQueryHandler implements DoctorQueryService {
     }
 
     @Override
-    public Mono<DoctorAggregate> findById(final String aggregateId) {
-        return doctorRepository.findById(aggregateId)
-                .switchIfEmpty(
-                        Mono.error(
-                                new ResourceDoesNotExistException(
-                                        "doctor aggregate does not exist")
-                        )
-                );
+    public Flux<Doctor> findAllBySurname(final String surname) {
+        return elasticDoctorRepository.findAllBySurname(surname);
     }
 
 }

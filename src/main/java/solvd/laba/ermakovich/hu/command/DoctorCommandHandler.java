@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
-import solvd.laba.ermakovich.hu.event.CreateAccount;
 import solvd.laba.ermakovich.hu.event.CreateDoctor;
+import solvd.laba.ermakovich.hu.event.DeleteDoctor;
 import solvd.laba.ermakovich.hu.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.event.EventRoot;
-import solvd.laba.ermakovich.hu.event.IntegrationEvent;
+import solvd.laba.ermakovich.hu.event.integration.CreateElasticDoctor;
+import solvd.laba.ermakovich.hu.event.integration.DeleteElasticDoctor;
 import solvd.laba.ermakovich.hu.kafka.producer.KafkaProducer;
 import solvd.laba.ermakovich.hu.query.DoctorQueryService;
 
@@ -36,7 +37,7 @@ public final class DoctorCommandHandler implements DoctorCommandService {
                         command.getDoctor().getPassword()
                 )
         );
-         return queryService.isExistByEmail(command.getDoctor().getEmail())
+        return queryService.isExistByEmail(command.getDoctor().getEmail())
                 .flatMap(isExist -> {
                     if (Boolean.TRUE.equals(isExist)) {
                         throw new ResourceAlreadyExistsException(
@@ -49,16 +50,29 @@ public final class DoctorCommandHandler implements DoctorCommandService {
                                 command.getAggregateId(), command.getDoctor()
                         );
                         eventService.create(createDoctor);
-                        IntegrationEvent accountEvent = new CreateAccount(
-                                command.getDoctor().getExternalId(),
-                                command.getAggregateId()
+                        kafkaProducer.synchronizeElastic(
+                                new CreateElasticDoctor(command.getDoctor())
                         );
-                        kafkaProducer.send(accountEvent);
-                        return aggregateService.applyCreateOperation(
-                                createDoctor
+                        return aggregateService.create(
+                                        createDoctor
                                 )
                                 .then();
                     }
+                });
+    }
+
+    @Override
+    public Mono<Void> handle(final DeleteDoctorCommand command) {
+        return queryService.findByExternalId(command.getExternalId())
+                .flatMap(doctorAggregate -> {
+                    EventRoot eventRoot = new DeleteDoctor(
+                            doctorAggregate.getId()
+                    );
+                    eventService.create(eventRoot);
+                    kafkaProducer.synchronizeElastic(
+                            new DeleteElasticDoctor(command.getExternalId())
+                    );
+                    return aggregateService.delete(eventRoot);
                 });
     }
 

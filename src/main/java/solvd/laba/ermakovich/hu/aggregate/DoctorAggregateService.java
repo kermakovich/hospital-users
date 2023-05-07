@@ -9,9 +9,9 @@ import solvd.laba.ermakovich.hu.event.EventRoot;
  */
 public interface DoctorAggregateService {
 
-    Mono<DoctorAggregate> apply(EventRoot eventRoot);
+    Mono<DoctorAggregate> create(EventRoot eventRoot);
 
-    Mono<DoctorAggregate> applyCreateOperation(EventRoot eventRoot);
+    Mono<Void> delete(EventRoot eventRoot);
 
 
 }

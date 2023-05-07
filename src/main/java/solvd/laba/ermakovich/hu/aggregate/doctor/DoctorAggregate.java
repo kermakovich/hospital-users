@@ -3,8 +3,8 @@ package solvd.laba.ermakovich.hu.aggregate.doctor;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import solvd.laba.ermakovich.hu.aggregate.AggregateRoot;
-import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.Doctor;
 
 /**
  * @author Ermakovich Kseniya

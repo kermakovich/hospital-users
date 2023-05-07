@@ -16,7 +16,8 @@ import solvd.laba.ermakovich.hu.domain.Doctor;
 @Data
 @AllArgsConstructor
 @SuperBuilder
-public final class CreateDoctor extends EventRoot implements Event {
+public final class CreateDoctor extends EventRoot
+        implements Event, ModifyAggregate {
 
     public static final String EVENT_TYPE = "CreateDoctor";
 

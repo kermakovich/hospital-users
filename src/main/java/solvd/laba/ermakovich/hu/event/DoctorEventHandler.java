@@ -15,7 +15,7 @@ public final class DoctorEventHandler implements DoctorEventService {
 
     @Override
     public void create(final EventRoot eventRoot) {
-         saveCustom.save(eventRoot).subscribe();
+        saveCustom.save(eventRoot).subscribe();
     }
 
 }

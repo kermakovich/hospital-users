@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import reactor.kafka.receiver.KafkaReceiver;
 import reactor.kafka.receiver.ReceiverOptions;
-import solvd.laba.ermakovich.hu.event.IntegrationEvent;
+import solvd.laba.ermakovich.hu.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya
@@ -23,10 +23,11 @@ import solvd.laba.ermakovich.hu.event.IntegrationEvent;
 @RequiredArgsConstructor
 public class KafkaConsumerConfig {
 
-    private static final String TOPIC_KEY = "topic";
-
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
+
+    @Value("${spring.kafka.producer.topic}")
+    private String topic;
 
 
     private Map<String, Object> kafkaConsumerProperties() {
@@ -43,7 +44,6 @@ public class KafkaConsumerConfig {
                 false);
         kafkaPropertiesMap.put(JsonDeserializer.VALUE_DEFAULT_TYPE,
                 IntegrationEvent.class);
-        kafkaPropertiesMap.put(TOPIC_KEY, "account_events");
         return kafkaPropertiesMap;
     }
 
@@ -53,9 +53,9 @@ public class KafkaConsumerConfig {
         ReceiverOptions<String, IntegrationEvent> options
                 = ReceiverOptions.create(properties);
         return options.subscription(
-                        (Collections.singletonList(
-                                (String) properties.get(TOPIC_KEY)
-                        )))
+                        Collections.singletonList(
+                                topic
+                        ))
                 .addAssignListener(receiverPartitions ->
                         log.debug("assign consumer {}", receiverPartitions)
                 )

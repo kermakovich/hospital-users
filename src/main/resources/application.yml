@@ -5,9 +5,6 @@ spring:
     name: hospital-users
   elasticsearch:
     uris: http://localhost:9200
-#    socket-timeout: 10s
-#    password: ChBbZT+-GTXrBGeS*KZO
-#    username: elastic
   data:
     mongodb:
       authentication-database: admin
@@ -21,7 +18,7 @@ spring:
   kafka:
     bootstrap-servers: ${BOOTSTRAP_SERVERS}
     producer:
-      topic: finance
+      topic: elasticsearch
 eureka:
   client:
     serviceUrl:

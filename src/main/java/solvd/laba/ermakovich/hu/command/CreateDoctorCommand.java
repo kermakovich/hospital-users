@@ -1,9 +1,8 @@
 package solvd.laba.ermakovich.hu.command;
 
+import java.util.UUID;
 import lombok.Data;
 import solvd.laba.ermakovich.hu.domain.Doctor;
-
-import java.util.UUID;
 
 /**
  * @author Ermakovich Kseniya

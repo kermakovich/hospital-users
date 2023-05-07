@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.event;
+package solvd.laba.ermakovich.hu.event.integration;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -20,7 +20,6 @@ public class IntegrationEvent {
     private String eventType;
     private String payload;
     private LocalDateTime timeStamp;
-    private String aggregateId;
 
     protected IntegrationEvent(final String eventType) {
         this.id = UUID.randomUUID().toString();
