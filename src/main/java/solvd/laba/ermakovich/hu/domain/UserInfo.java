@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import static org.springframework.data.elasticsearch.annotations.FieldType.Date;
 
 /**
  * @author Ermakovich Kseniya
@@ -32,7 +32,7 @@ public class UserInfo implements Serializable {
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @Field(type = Date, format = DateFormat.basic_date)
+    @Field(type = FieldType.Date, format = DateFormat.basic_date)
     private LocalDate birthday;
     private String email;
     private String password;
