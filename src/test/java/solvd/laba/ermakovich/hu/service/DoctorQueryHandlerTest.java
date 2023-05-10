@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,10 +12,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
-import solvd.laba.ermakovich.hu.elastic.ElasticDoctorRepository;
-import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
+import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
+import solvd.laba.ermakovich.hu.repository.mongo.DoctorRepository;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
 
 

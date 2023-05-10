@@ -1,9 +1,9 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.time.LocalDate;
 import java.util.UUID;
-import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.domain.Department;
 import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.domain.Specialization;

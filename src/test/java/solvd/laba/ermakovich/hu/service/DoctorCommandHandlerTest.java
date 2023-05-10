@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -10,17 +10,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
-import solvd.laba.ermakovich.hu.command.CreateDoctorCommand;
-import solvd.laba.ermakovich.hu.command.DeleteDoctorCommand;
+import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.domain.command.CreateDoctorCommand;
+import solvd.laba.ermakovich.hu.domain.command.DeleteDoctorCommand;
 import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
 import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
 import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
-import solvd.laba.ermakovich.hu.event.EventRoot;
-import solvd.laba.ermakovich.hu.event.integration.CreateElasticDoctor;
-import solvd.laba.ermakovich.hu.event.integration.DeleteElasticDoctor;
+import solvd.laba.ermakovich.hu.domain.event.EventRoot;
+import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
+import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
 import solvd.laba.ermakovich.hu.kafka.producer.KafkaProducer;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
 

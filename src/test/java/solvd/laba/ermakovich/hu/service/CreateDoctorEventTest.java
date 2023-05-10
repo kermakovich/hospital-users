@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
@@ -10,13 +10,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateServiceImpl;
-import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
-import solvd.laba.ermakovich.hu.event.CreateDoctor;
-import solvd.laba.ermakovich.hu.event.DeleteDoctor;
-import solvd.laba.ermakovich.hu.event.EventRoot;
-import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
+import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.domain.event.CreateDoctor;
+import solvd.laba.ermakovich.hu.domain.event.DeleteDoctor;
+import solvd.laba.ermakovich.hu.domain.event.EventRoot;
+import solvd.laba.ermakovich.hu.repository.mongo.DoctorRepository;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
 
 
@@ -39,11 +39,12 @@ final class CreateDoctorEventTest {
     @Test
     void verifyDoctorAggregateCreateTest() {
         var aggregateId = UUID.randomUUID().toString();
-        var aggregate = new DoctorAggregate(
-                aggregateId,
-                AggregateStatus.APPROVED
+        Mono<DoctorAggregate> expectedMono = Mono.just(
+                new DoctorAggregate(
+                    aggregateId,
+                    AggregateStatus.APPROVED
+                )
         );
-        Mono<DoctorAggregate> expectedMono = Mono.just(aggregate);
         EventRoot eventRoot = new CreateDoctor(aggregateId, TestDoctorFactory.getDoctor());
         DoctorAggregate expectedDoctorAggr = new DoctorAggregate(
                 aggregateId,

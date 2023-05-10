@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
@@ -11,10 +11,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.Doctor;
-import solvd.laba.ermakovich.hu.elastic.ElasticDoctorRepository;
-import solvd.laba.ermakovich.hu.event.elastic.ElasticDoctorEventHandler;
-import solvd.laba.ermakovich.hu.event.integration.CreateElasticDoctor;
-import solvd.laba.ermakovich.hu.event.integration.DeleteElasticDoctor;
+import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
+import solvd.laba.ermakovich.hu.service.event.elastic.ElasticDoctorEventHandler;
+import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
+import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
 
 
 /**

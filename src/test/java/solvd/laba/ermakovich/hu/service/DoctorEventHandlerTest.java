@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service.impl;
+package solvd.laba.ermakovich.hu.service;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.event.CreateDoctor;
+import solvd.laba.ermakovich.hu.domain.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.service.event.DoctorEventHandler;
-import solvd.laba.ermakovich.hu.event.EventRoot;
-import solvd.laba.ermakovich.hu.mongo.SaveCustom;
+import solvd.laba.ermakovich.hu.domain.event.EventRoot;
+import solvd.laba.ermakovich.hu.repository.mongo.SaveCustom;
 
 
 /**
