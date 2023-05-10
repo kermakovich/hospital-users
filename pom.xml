@@ -25,6 +25,12 @@
 		<lombok.version>1.18.26</lombok.version>
 		<elastic.search.version>5.0.5</elastic.search.version>
 		<maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
+		<reactor.test.version>3.5.5</reactor.test.version>
+		<junit.version>5.9.2</junit.version>
+		<mockito.version>5.3.1</mockito.version>
+		<spring.test.version>6.0.8</spring.test.version>
+		<jacoco.version>0.8.10</jacoco.version>
+		<surefire.version>3.0.0-M8</surefire.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -113,6 +119,30 @@
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 			<version>${springboot.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+			<version>${reactor.test.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.test.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -161,6 +191,49 @@
 						<goals>
 							<goal>check</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+										<limit>
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.65</minimum>
+										</limit>
+									</limits>
+									<includes>
+										<include>solvd.laba.ermakovich.hu.command.DoctorCommandHandler</include>
+										<include>solvd.laba.ermakovich.hu.aggregate.DoctorAggregateServiceImpl</include>
+										<include>solvd.laba.ermakovich.hu.event.DoctorEventHandler</include>
+										<include>solvd.laba.ermakovich.hu.query.**</include>
+									</includes>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
