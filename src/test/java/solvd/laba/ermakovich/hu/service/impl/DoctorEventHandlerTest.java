@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import solvd.laba.ermakovich.hu.event.CreateDoctor;
-import solvd.laba.ermakovich.hu.event.DoctorEventHandler;
+import solvd.laba.ermakovich.hu.service.event.DoctorEventHandler;
 import solvd.laba.ermakovich.hu.event.EventRoot;
 import solvd.laba.ermakovich.hu.mongo.SaveCustom;
 

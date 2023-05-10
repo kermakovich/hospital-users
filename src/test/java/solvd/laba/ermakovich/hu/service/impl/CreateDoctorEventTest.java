@@ -11,13 +11,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateServiceImpl;
+import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateServiceImpl;
 import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.event.DeleteDoctor;
 import solvd.laba.ermakovich.hu.event.EventRoot;
 import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
-import solvd.laba.ermakovich.hu.query.DoctorQueryHandler;
+import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
 
 
 

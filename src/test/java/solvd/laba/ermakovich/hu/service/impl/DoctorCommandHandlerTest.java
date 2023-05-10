@@ -11,18 +11,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.aggregate.DoctorAggregateService;
+import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.command.CreateDoctorCommand;
 import solvd.laba.ermakovich.hu.command.DeleteDoctorCommand;
-import solvd.laba.ermakovich.hu.command.DoctorCommandHandler;
+import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
 import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
-import solvd.laba.ermakovich.hu.event.DoctorEventService;
+import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.event.EventRoot;
 import solvd.laba.ermakovich.hu.event.integration.CreateElasticDoctor;
 import solvd.laba.ermakovich.hu.event.integration.DeleteElasticDoctor;
 import solvd.laba.ermakovich.hu.kafka.producer.KafkaProducer;
-import solvd.laba.ermakovich.hu.query.DoctorQueryService;
+import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
 
 
 /**

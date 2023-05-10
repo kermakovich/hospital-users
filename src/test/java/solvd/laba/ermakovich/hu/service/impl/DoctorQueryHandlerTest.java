@@ -16,7 +16,7 @@ import solvd.laba.ermakovich.hu.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.elastic.ElasticDoctorRepository;
 import solvd.laba.ermakovich.hu.mongo.DoctorRepository;
-import solvd.laba.ermakovich.hu.query.DoctorQueryHandler;
+import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
 
 
 /**

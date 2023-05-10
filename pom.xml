@@ -226,10 +226,7 @@
 										</limit>
 									</limits>
 									<includes>
-										<include>solvd.laba.ermakovich.hu.command.DoctorCommandHandler</include>
-										<include>solvd.laba.ermakovich.hu.aggregate.DoctorAggregateServiceImpl</include>
-										<include>solvd.laba.ermakovich.hu.event.DoctorEventHandler</include>
-										<include>solvd.laba.ermakovich.hu.query.**</include>
+										<include>solvd.laba.ermakovich.hu.service.**</include>
 									</includes>
 								</rule>
 							</rules>
