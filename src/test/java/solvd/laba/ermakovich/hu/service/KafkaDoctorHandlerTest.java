@@ -23,7 +23,7 @@ import solvd.laba.ermakovich.hu.service.event.kafka.KafkaDoctorHandler;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class KafkaDoctorHandlerTest {
+final class KafkaDoctorHandlerTest extends BaseTest {
 
     @Mock
     ElasticDoctorEventService elasticEventService;
@@ -33,13 +33,13 @@ final class KafkaDoctorHandlerTest {
 
     @Test
     @SneakyThrows
-    void verifyCreateTest() {
+    void verifiesCreate() {
         var event = new IntegrationEvent();
         event.setEventType("createElasticDoctor");
         event.setPayload(new ObjectMapper()
-                .writeValueAsString(TestDoctorFactory.getDoctor())
+                .writeValueAsString(BaseTest.doctor)
         );
-        var expectedCreateDoctor = new CreateElasticDoctor(TestDoctorFactory.getDoctor());
+        var expectedCreateDoctor = new CreateElasticDoctor(BaseTest.doctor);
         CreateElasticDoctor actual = kafkaDoctorHandler.createElasticDoctor(event);
         Assertions.assertEquals(
                 expectedCreateDoctor,
@@ -49,7 +49,7 @@ final class KafkaDoctorHandlerTest {
 
     @Test
     @SneakyThrows
-    void verifyDeleteTest() {
+    void verifiesDelete() {
         var event = new IntegrationEvent();
         var externalId = UUID.randomUUID();
         event.setEventType("deleteElasticDoctor");
@@ -66,14 +66,14 @@ final class KafkaDoctorHandlerTest {
 
     @Test
     @SneakyThrows
-    void verifyWhenCreateDoctorTest() {
+    void verifiesWhenCreateDoctor() {
         var event = new IntegrationEvent();
         event.setEventType("createElasticDoctor");
         event.setPayload(new ObjectMapper()
-                .writeValueAsString(TestDoctorFactory.getDoctor())
+                .writeValueAsString(BaseTest.doctor)
         );
         Mockito.doReturn(Mono.just(
-                    TestDoctorFactory.getDoctor()
+                        BaseTest.doctor
                 ))
                 .when(elasticEventService)
                 .create(
@@ -89,14 +89,11 @@ final class KafkaDoctorHandlerTest {
 
     @Test
     @SneakyThrows
-    void verifyWhenDeleteDoctorTest() {
+    void verifiesWhenDeleteDoctor() {
         var event = new IntegrationEvent();
         event.setEventType("deleteElasticDoctor");
         event.setPayload(new ObjectMapper()
-                .writeValueAsString(TestDoctorFactory
-                        .getDoctor()
-                        .getExternalId()
-                )
+                .writeValueAsString(BaseTest.doctor.getExternalId())
         );
         Mockito.doReturn(Mono.empty())
                 .when(elasticEventService)
@@ -112,7 +109,7 @@ final class KafkaDoctorHandlerTest {
     }
 
     @Test
-    void verifyWhenWrongEventTypeTest() {
+    void verifiesWhenWrongEventType() {
         var event = new IntegrationEvent();
         event.setEventType("wrongEventType");
         Assertions.assertThrows(IllegalOperationException.class,

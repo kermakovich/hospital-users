@@ -23,7 +23,7 @@ import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class DoctorQueryHandlerTest {
+final class DoctorQueryHandlerTest extends BaseTest {
 
     @Mock
     DoctorRepository doctorRepository;
@@ -35,9 +35,9 @@ final class DoctorQueryHandlerTest {
     DoctorQueryHandler queryHandler;
 
     @Test
-    void verifyIsExistByEmailTest() {
+    void verifiesDoctorExistByEmail() {
         final var email = "pomodorov@mail.ru";
-        Mockito. doReturn(Mono.just(true))
+        Mockito.doReturn(Mono.just(true))
                 .when(elasticDoctorRepository)
                 .existsByEmail(Mockito.any(String.class));
         StepVerifier.create(
@@ -52,8 +52,8 @@ final class DoctorQueryHandlerTest {
     }
 
     @Test
-    void verifyFindByExternalIdTest() {
-        final var expectedDoctorAggregate = TestDoctorFactory.getDoctorAggregate();
+    void verifiesFindByExternalId() {
+        final var expectedDoctorAggregate = BaseTest.doctorAggregate;
         Mockito.doReturn(Mono.just(expectedDoctorAggregate))
                 .when(doctorRepository)
                 .findByDoctorExternalId(Mockito.any(UUID.class));
@@ -75,8 +75,8 @@ final class DoctorQueryHandlerTest {
     }
 
     @Test
-    void verifyFindByIdTest() {
-        final var expectedDoctorAggregate = TestDoctorFactory.getDoctorAggregate();
+    void verifiesFindById() {
+        final var expectedDoctorAggregate = BaseTest.doctorAggregate;
         Mockito.doReturn(Mono.just(expectedDoctorAggregate))
                 .when(doctorRepository)
                 .findById(Mockito.any(String.class));
@@ -96,7 +96,7 @@ final class DoctorQueryHandlerTest {
     }
 
     @Test
-    void verifyCreateIfDoesNotExistByIdTest() {
+    void verifiesCreateIfDoesNotExistById() {
         final var expectedDoctorAggregate =  new DoctorAggregate(
                 UUID.randomUUID().toString(),
                 AggregateStatus.APPROVED
@@ -118,11 +118,11 @@ final class DoctorQueryHandlerTest {
     }
 
     @Test
-    void verifyFindAllBySurnameTest() {
+    void verifiesFindAllBySurname() {
         final var surname = "pomidorov";
         final var doctorList = List.of(
-                TestDoctorFactory.getDoctor(),
-                TestDoctorFactory.getDoctor()
+                BaseTest.doctor,
+                BaseTest.doctor
         );
         Mockito.doReturn(Flux.just(doctorList))
                 .when(elasticDoctorRepository)

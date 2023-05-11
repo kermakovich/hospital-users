@@ -2,20 +2,26 @@ package solvd.laba.ermakovich.hu.service;
 
 import java.time.LocalDate;
 import java.util.UUID;
-import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
+import org.junit.jupiter.api.BeforeAll;
 import solvd.laba.ermakovich.hu.domain.Department;
 import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.domain.Specialization;
 import solvd.laba.ermakovich.hu.domain.UserRole;
+import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
+import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 
 /**
  * @author Ermakovich Kseniya
  */
-public final class TestDoctorFactory {
+@SuppressWarnings("JTCOP.RuleAllTestsHaveProductionClass")
+public abstract class BaseTest {
 
-    public static Doctor getDoctor() {
-        var doctor = new Doctor();
+    protected static Doctor doctor;
+    protected static DoctorAggregate doctorAggregate;
+
+    @BeforeAll
+    static void doctorSetup() {
+        doctor = new Doctor();
         doctor.setExternalId(UUID.fromString("688e40eb-3209-4a2e-83cc-6a178b1806ab"));
         doctor.setName("alex");
         doctor.setPassword("$2a$10$S8NVlLc9gdQ6Vjn1hzHru.md0wp6Z4en6WOe1se790aZMnjzfdPpm");
@@ -28,16 +34,15 @@ public final class TestDoctorFactory {
         doctor.setRole(UserRole.DOCTOR);
         doctor.setSurname("pomidorov");
         doctor.setDepartment(Department.THERAPEUTIC);
-        return doctor;
     }
 
-    public static DoctorAggregate getDoctorAggregate() {
-        var aggregate = new DoctorAggregate(
+    @BeforeAll
+    static void doctorAggregateSetup() {
+        doctorAggregate = new DoctorAggregate(
                 UUID.randomUUID().toString(),
                 AggregateStatus.APPROVED
         );
-        aggregate.setDoctor(getDoctor());
-        return aggregate;
+        doctorAggregate.setDoctor(doctor);
     }
 
 }

@@ -27,7 +27,7 @@ final class DoctorEventHandlerTest {
     DoctorEventHandler doctorEventHandler;
 
     @Test
-    void verifyCreateTest() {
+    void verifiesCreateDoctor() {
         var event = new CreateDoctor(UUID.randomUUID().toString());
         Mockito.doReturn(Mono.just(event))
                 .when(saveCustom)

@@ -31,6 +31,7 @@
 		<spring.test.version>6.0.8</spring.test.version>
 		<jacoco.version>0.8.10</jacoco.version>
 		<surefire.version>3.0.0-M8</surefire.version>
+		<jtcop.version>0.1.13</jtcop.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -226,6 +227,19 @@
 								</rule>
 							</rules>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.volodya-lombrozo</groupId>
+				<artifactId>jtcop-maven-plugin</artifactId>
+				<version>${jtcop.version}</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

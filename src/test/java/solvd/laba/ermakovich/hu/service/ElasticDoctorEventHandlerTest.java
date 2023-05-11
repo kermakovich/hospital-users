@@ -21,7 +21,7 @@ import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class ElasticDoctorEventHandlerTest {
+final class ElasticDoctorEventHandlerTest extends BaseTest {
 
     @Mock
     ElasticDoctorRepository elasticDoctorRepository;
@@ -30,9 +30,9 @@ final class ElasticDoctorEventHandlerTest {
     ElasticDoctorEventHandler elasticDoctorEventHandler;
 
     @Test
-    void verifyCreateTest() {
-       var event = new CreateElasticDoctor(TestDoctorFactory.getDoctor());
-        Mockito.doReturn(Mono.just(TestDoctorFactory.getDoctor()))
+    void verifiesCreate() {
+       var event = new CreateElasticDoctor(BaseTest.doctor);
+        Mockito.doReturn(Mono.just(BaseTest.doctor))
                .when(elasticDoctorRepository)
                .save(Mockito.any(Doctor.class));
        Mono<Doctor> actualDoctor = elasticDoctorEventHandler
@@ -47,7 +47,7 @@ final class ElasticDoctorEventHandlerTest {
     }
 
     @Test
-    void verifyDeleteTest() {
+    void verifiesDelete() {
         var event = new DeleteElasticDoctor(UUID.randomUUID());
         Mockito.doReturn(Mono.empty())
                 .when(elasticDoctorRepository)

@@ -11,17 +11,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.domain.command.CreateDoctorCommand;
 import solvd.laba.ermakovich.hu.domain.command.DeleteDoctorCommand;
-import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
-import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
-import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.domain.event.EventRoot;
 import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
+import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
 import solvd.laba.ermakovich.hu.kafka.producer.KafkaProducer;
+import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
+import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
+import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
 
 
@@ -29,7 +29,7 @@ import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class DoctorCommandHandlerTest {
+final class DoctorCommandHandlerTest extends BaseTest {
 
     @Mock
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -50,8 +50,8 @@ final class DoctorCommandHandlerTest {
     DoctorCommandHandler doctorCommandHandler;
 
     @Test
-    void verifyDoctorCreateSuccessfulTest() {
-        var command = new CreateDoctorCommand(TestDoctorFactory.getDoctor());
+    void verifiesDoctorCreateSuccessful() {
+        var command = new CreateDoctorCommand(BaseTest.doctor);
         Mockito.doReturn("")
                 .when(bCryptPasswordEncoder)
                 .encode(Mockito.any(String.class));
@@ -83,9 +83,9 @@ final class DoctorCommandHandlerTest {
 
 
     @Test
-    void verifyDoctorCreateWithAlreadyExistsTest() {
+    void verifiesDoctorCreateWithAlreadyExists() {
         var command = new CreateDoctorCommand(
-                TestDoctorFactory.getDoctor()
+                BaseTest.doctor
         );
         Mockito.doReturn("").when(bCryptPasswordEncoder)
                 .encode(Mockito.any(String.class));
@@ -99,9 +99,9 @@ final class DoctorCommandHandlerTest {
     }
 
     @Test
-    void verifyDoctorDeleteTest() {
+    void verifiesDoctorDelete() {
         var command = new DeleteDoctorCommand(UUID.randomUUID());
-        Mockito.doReturn(Mono.just(TestDoctorFactory.getDoctorAggregate()))
+        Mockito.doReturn(Mono.just(BaseTest.doctorAggregate))
                 .when(doctorQueryService)
                 .findByExternalId(Mockito.any(UUID.class));
         Mockito.doNothing()

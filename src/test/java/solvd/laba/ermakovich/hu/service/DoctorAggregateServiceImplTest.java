@@ -11,12 +11,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
-import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateServiceImpl;
 import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.domain.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.domain.event.DeleteDoctor;
 import solvd.laba.ermakovich.hu.domain.event.EventRoot;
 import solvd.laba.ermakovich.hu.repository.mongo.DoctorRepository;
+import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateServiceImpl;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
 
 
@@ -25,7 +25,7 @@ import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class CreateDoctorEventTest {
+final class DoctorAggregateServiceImplTest {
 
     @Mock
     DoctorQueryHandler doctorQueryService;
@@ -37,7 +37,7 @@ final class CreateDoctorEventTest {
     DoctorAggregateServiceImpl doctorAggregateService;
 
     @Test
-    void verifyDoctorAggregateCreateTest() {
+    void verifiesDoctorAggregateCreate() {
         var aggregateId = UUID.randomUUID().toString();
         Mono<DoctorAggregate> expectedMono = Mono.just(
                 new DoctorAggregate(
@@ -45,20 +45,18 @@ final class CreateDoctorEventTest {
                     AggregateStatus.APPROVED
                 )
         );
-        EventRoot eventRoot = new CreateDoctor(aggregateId, TestDoctorFactory.getDoctor());
+        EventRoot eventRoot = new CreateDoctor(aggregateId, BaseTest.doctor);
         DoctorAggregate expectedDoctorAggr = new DoctorAggregate(
                 aggregateId,
                 AggregateStatus.APPROVED
         );
-        expectedDoctorAggr.setDoctor(TestDoctorFactory.getDoctor());
+        expectedDoctorAggr.setDoctor(BaseTest.doctor);
         Mockito.doReturn(expectedMono)
                 .when(doctorQueryService)
                 .findByIdOrCreate(
                         Mockito.any(String.class)
                 );
-        Mockito.doReturn(Mono.just(
-                expectedDoctorAggr
-        ))
+        Mockito.doReturn(expectedMono)
                 .when(doctorRepository)
                 .save(Mockito.any(DoctorAggregate.class));
         Mono<DoctorAggregate> actualMono = doctorAggregateService.create(eventRoot);
@@ -75,7 +73,7 @@ final class CreateDoctorEventTest {
     }
 
     @Test
-    void verifyDoctorAggregateDeleteTest() {
+    void verifiesDoctorAggregateDelete() {
         EventRoot eventRoot = new DeleteDoctor(UUID.randomUUID().toString());
         Mockito.when(doctorRepository.deleteById(eventRoot.getAggregateId()))
                 .thenReturn(Mono.empty());
