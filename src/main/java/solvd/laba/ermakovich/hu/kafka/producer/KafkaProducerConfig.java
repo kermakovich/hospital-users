@@ -14,7 +14,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
-import solvd.laba.ermakovich.hu.event.integration.IntegrationEvent;
+import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya

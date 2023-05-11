@@ -7,8 +7,10 @@ import org.springframework.data.elasticsearch.repository.config.EnableReactiveEl
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@EnableReactiveMongoRepositories("solvd.laba.ermakovich.hu.mongo")
-@EnableReactiveElasticsearchRepositories("solvd.laba.ermakovich.hu.elastic")
+@EnableReactiveMongoRepositories("solvd.laba.ermakovich.hu.repository.mongo")
+@EnableReactiveElasticsearchRepositories(
+        "solvd.laba.ermakovich.hu.repository.elastic"
+)
 public class AppInitializer {
 
     public static void main(final String[] args) {

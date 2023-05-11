@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import reactor.kafka.receiver.KafkaReceiver;
 import reactor.kafka.receiver.ReceiverOptions;
-import solvd.laba.ermakovich.hu.event.integration.IntegrationEvent;
+import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya

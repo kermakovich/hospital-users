@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
-import solvd.laba.ermakovich.hu.event.integration.IntegrationEvent;
+import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya
