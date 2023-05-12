@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.service;
+package solvd.laba.ermakovich.hu.helper;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -18,6 +18,7 @@ public abstract class BaseTest {
 
     protected static Doctor doctor;
     protected static DoctorAggregate doctorAggregate;
+    protected static DoctorAggregate doctorAggregateWithoutDoctor;
 
     @BeforeAll
     static void doctorSetup() {
@@ -43,6 +44,14 @@ public abstract class BaseTest {
                 AggregateStatus.APPROVED
         );
         doctorAggregate.setDoctor(doctor);
+    }
+
+    @BeforeAll
+    static void doctorAggregateWithoutDoctorSetup() {
+        doctorAggregateWithoutDoctor = new DoctorAggregate(
+                UUID.randomUUID().toString(),
+                AggregateStatus.APPROVED
+        );
     }
 
 }

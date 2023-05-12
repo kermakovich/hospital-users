@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
+import solvd.laba.ermakovich.hu.helper.BaseTest;
 import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 import solvd.laba.ermakovich.hu.repository.mongo.DoctorRepository;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;

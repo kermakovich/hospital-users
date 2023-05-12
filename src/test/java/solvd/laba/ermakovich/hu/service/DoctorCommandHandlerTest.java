@@ -18,6 +18,7 @@ import solvd.laba.ermakovich.hu.domain.event.EventRoot;
 import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.exception.ResourceAlreadyExistsException;
+import solvd.laba.ermakovich.hu.helper.BaseTest;
 import solvd.laba.ermakovich.hu.kafka.producer.KafkaProducer;
 import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;

@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.event.integration.DeleteElasticDoctor;
 import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
-import solvd.laba.ermakovich.hu.service.BaseTest;
+import solvd.laba.ermakovich.hu.helper.BaseTest;
 import solvd.laba.ermakovich.hu.service.kafka.operation.DeleteDoctorOperation;
 
 /**

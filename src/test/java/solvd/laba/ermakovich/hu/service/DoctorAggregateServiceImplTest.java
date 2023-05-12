@@ -10,11 +10,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.domain.event.CreateDoctor;
 import solvd.laba.ermakovich.hu.domain.event.DeleteDoctor;
 import solvd.laba.ermakovich.hu.domain.event.EventRoot;
+import solvd.laba.ermakovich.hu.helper.BaseTest;
 import solvd.laba.ermakovich.hu.repository.mongo.DoctorRepository;
 import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateServiceImpl;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
@@ -25,7 +25,7 @@ import solvd.laba.ermakovich.hu.service.query.DoctorQueryHandler;
  * @author Ermakovich Kseniya
  */
 @ExtendWith(MockitoExtension.class)
-final class DoctorAggregateServiceImplTest {
+final class DoctorAggregateServiceImplTest extends BaseTest {
 
     @Mock
     DoctorQueryHandler doctorQueryService;
@@ -39,18 +39,9 @@ final class DoctorAggregateServiceImplTest {
     @Test
     void createsDoctorAggregate() {
         var aggregateId = UUID.randomUUID().toString();
-        Mono<DoctorAggregate> expectedMono = Mono.just(
-                new DoctorAggregate(
-                    aggregateId,
-                    AggregateStatus.APPROVED
-                )
-        );
+        Mono<DoctorAggregate> expectedMono = Mono.just(doctorAggregateWithoutDoctor);
         EventRoot eventRoot = new CreateDoctor(aggregateId, BaseTest.doctor);
-        DoctorAggregate expectedDoctorAggr = new DoctorAggregate(
-                aggregateId,
-                AggregateStatus.APPROVED
-        );
-        expectedDoctorAggr.setDoctor(BaseTest.doctor);
+        DoctorAggregate expectedDoctorAggr = doctorAggregate;
         Mockito.doReturn(expectedMono)
                 .when(doctorQueryService)
                 .findByIdOrCreate(
