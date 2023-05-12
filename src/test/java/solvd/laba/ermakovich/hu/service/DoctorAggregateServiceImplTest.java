@@ -37,7 +37,7 @@ final class DoctorAggregateServiceImplTest {
     DoctorAggregateServiceImpl doctorAggregateService;
 
     @Test
-    void verifiesDoctorAggregateCreate() {
+    void createsDoctorAggregate() {
         var aggregateId = UUID.randomUUID().toString();
         Mono<DoctorAggregate> expectedMono = Mono.just(
                 new DoctorAggregate(
@@ -73,7 +73,7 @@ final class DoctorAggregateServiceImplTest {
     }
 
     @Test
-    void verifiesDoctorAggregateDelete() {
+    void deletesDoctorAggregate() {
         EventRoot eventRoot = new DeleteDoctor(UUID.randomUUID().toString());
         Mockito.when(doctorRepository.deleteById(eventRoot.getAggregateId()))
                 .thenReturn(Mono.empty());

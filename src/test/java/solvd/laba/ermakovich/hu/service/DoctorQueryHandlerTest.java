@@ -96,7 +96,7 @@ final class DoctorQueryHandlerTest extends BaseTest {
     }
 
     @Test
-    void verifiesCreateIfDoesNotExistById() {
+    void createsAggregateIfDoesNotExistById() {
         final var expectedDoctorAggregate =  new DoctorAggregate(
                 UUID.randomUUID().toString(),
                 AggregateStatus.APPROVED

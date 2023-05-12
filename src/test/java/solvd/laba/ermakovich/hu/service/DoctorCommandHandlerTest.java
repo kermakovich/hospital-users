@@ -50,7 +50,7 @@ final class DoctorCommandHandlerTest extends BaseTest {
     DoctorCommandHandler doctorCommandHandler;
 
     @Test
-    void verifiesDoctorCreateSuccessful() {
+    void createsDoctor() {
         var command = new CreateDoctorCommand(BaseTest.doctor);
         Mockito.doReturn("")
                 .when(bCryptPasswordEncoder)
@@ -83,7 +83,7 @@ final class DoctorCommandHandlerTest extends BaseTest {
 
 
     @Test
-    void verifiesDoctorCreateWithAlreadyExists() {
+    void createsDoctorWithError() {
         var command = new CreateDoctorCommand(
                 BaseTest.doctor
         );
@@ -99,7 +99,7 @@ final class DoctorCommandHandlerTest extends BaseTest {
     }
 
     @Test
-    void verifiesDoctorDelete() {
+    void deletesDoctor() {
         var command = new DeleteDoctorCommand(UUID.randomUUID());
         Mockito.doReturn(Mono.just(BaseTest.doctorAggregate))
                 .when(doctorQueryService)
