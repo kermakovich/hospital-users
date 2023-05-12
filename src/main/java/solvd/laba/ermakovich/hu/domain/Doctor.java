@@ -1,8 +1,7 @@
 package solvd.laba.ermakovich.hu.domain;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 

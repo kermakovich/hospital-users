@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
-import solvd.laba.ermakovich.hu.event.IntegrationEvent;
+import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya
@@ -16,10 +16,10 @@ public final class KafkaProducer {
 
     private final KafkaSender<String, IntegrationEvent> sender;
 
-    public void send(final IntegrationEvent value) {
+    public void synchronizeElastic(final IntegrationEvent value) {
         sender.send(
                 Mono.just(
-                        SenderRecord.create("finance",
+                        SenderRecord.create("elasticsearch",
                                 0,
                                 System.currentTimeMillis(),
                                 value.getEventType(),

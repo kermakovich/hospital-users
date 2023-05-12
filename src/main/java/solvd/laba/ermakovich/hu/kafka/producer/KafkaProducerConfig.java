@@ -14,7 +14,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
-import solvd.laba.ermakovich.hu.event.IntegrationEvent;
+import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
 
 /**
  * @author Ermakovich Kseniya
@@ -57,8 +57,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name(topic)
+    public NewTopic elastic() {
+        return TopicBuilder.name("elasticsearch")
                 .partitions(2)
                 .build();
     }
