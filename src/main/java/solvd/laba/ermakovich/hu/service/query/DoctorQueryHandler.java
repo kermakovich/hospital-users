@@ -38,7 +38,7 @@ public final class DoctorQueryHandler implements DoctorQueryService {
                         Mono.just(
                                 new DoctorAggregate(
                                         aggregateId,
-                                        AggregateStatus.PENDING
+                                        AggregateStatus.APPROVED
                                 )
                         )
                 );
