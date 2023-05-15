@@ -39,8 +39,8 @@ final class DoctorQueryHandlerTest extends BaseTest {
     void verifiesDoctorExistByEmail() {
         final var email = "pomodorov@mail.ru";
         Mockito.doReturn(Mono.just(true))
-                .when(elasticDoctorRepository)
-                .existsByEmail(Mockito.any(String.class));
+                .when(doctorRepository)
+                .existsByDoctorEmail(Mockito.any(String.class));
         StepVerifier.create(
                 queryHandler.isExistByEmail(email)
                 )
@@ -48,8 +48,8 @@ final class DoctorQueryHandlerTest extends BaseTest {
                         Assertions.assertEquals(true, isExist)
                 )
                 .verifyComplete();
-        Mockito.verify(elasticDoctorRepository, Mockito.times(1))
-                .existsByEmail(Mockito.any(String.class));
+        Mockito.verify(doctorRepository, Mockito.times(1))
+                .existsByDoctorEmail(Mockito.any(String.class));
     }
 
     @Test

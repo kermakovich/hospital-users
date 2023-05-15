@@ -33,7 +33,7 @@ final class KafkaEventHandlerImplTest extends BaseTest {
         var operations = new HashMap<String, Operation>(1);
         operations.put("createDoctor", createDoctorOperation);
         kafkaEventHandler = new KafkaEventHandlerImpl(operations);
-        IntegrationEvent event = new CreateElasticDoctor(doctor);
+        IntegrationEvent event = new CreateElasticDoctor(elasticDoctor);
         Mockito.doReturn(Mono.empty())
                 .when(createDoctorOperation)
                 .on(Mockito.any(IntegrationEvent.class));

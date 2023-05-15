@@ -13,4 +13,6 @@ public interface DoctorRepository
 
     Mono<DoctorAggregate> findByDoctorExternalId(UUID externalId);
 
+    Mono<Boolean> existsByDoctorEmail(String email);
+
 }
