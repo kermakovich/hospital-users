@@ -3,7 +3,7 @@ package solvd.laba.ermakovich.hu.domain.event.integration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.SneakyThrows;
-import solvd.laba.ermakovich.hu.domain.Doctor;
+import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
 
 /**
  * @author Ermakovich Kseniya
@@ -12,13 +12,13 @@ import solvd.laba.ermakovich.hu.domain.Doctor;
 public class CreateElasticDoctor extends IntegrationEvent {
 
     public static final String EVENT_TYPE = "createDoctor";
-    private Doctor doctor;
+    private ElasticDoctor doctor;
 
     public CreateElasticDoctor() {
         super(EVENT_TYPE);
     }
 
-    public CreateElasticDoctor(final Doctor doctor) {
+    public CreateElasticDoctor(final ElasticDoctor doctor) {
         this();
         this.doctor = doctor;
     }

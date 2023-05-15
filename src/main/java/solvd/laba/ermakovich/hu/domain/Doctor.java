@@ -1,15 +1,14 @@
 package solvd.laba.ermakovich.hu.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * @author Ermakovich Kseniya
  */
 @Data
-@Document(indexName = "doctor")
 public class Doctor extends UserInfo implements Serializable {
 
     @Id
@@ -17,5 +16,8 @@ public class Doctor extends UserInfo implements Serializable {
     private Department department;
     private Specialization specialization;
     private Integer cabinet;
+    private BigDecimal pricePerHour;
+    private Float experience;
+    private PatientAges patientAges;
 
 }

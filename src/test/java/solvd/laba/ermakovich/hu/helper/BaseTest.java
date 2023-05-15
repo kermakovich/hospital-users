@@ -1,10 +1,13 @@
 package solvd.laba.ermakovich.hu.helper;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import solvd.laba.ermakovich.hu.domain.Department;
 import solvd.laba.ermakovich.hu.domain.Doctor;
+import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
+import solvd.laba.ermakovich.hu.domain.PatientAges;
 import solvd.laba.ermakovich.hu.domain.Specialization;
 import solvd.laba.ermakovich.hu.domain.UserRole;
 import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
@@ -17,6 +20,7 @@ import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 public abstract class BaseTest {
 
     protected static Doctor doctor;
+    protected static ElasticDoctor elasticDoctor;
     protected static DoctorAggregate doctorAggregate;
     protected static DoctorAggregate doctorAggregateWithoutDoctor;
 
@@ -35,6 +39,18 @@ public abstract class BaseTest {
         doctor.setRole(UserRole.DOCTOR);
         doctor.setSurname("pomidorov");
         doctor.setDepartment(Department.THERAPEUTIC);
+    }
+
+    @BeforeAll
+    static void elasticDoctorSetup() {
+        elasticDoctor = new ElasticDoctor();
+        elasticDoctor.setId("74e5ed85-c727-4441-8862-166bb4d5f07e");
+        elasticDoctor.setExperience(2.4F);
+        elasticDoctor.setSpecialization(Specialization.THERAPIST);
+        elasticDoctor.setSurname("pomidorov");
+        elasticDoctor.setDepartment(Department.THERAPEUTIC);
+        elasticDoctor.setPricePerHour(BigDecimal.valueOf(2.45));
+        elasticDoctor.setPatientAges(new PatientAges(0, 18));
     }
 
     @BeforeAll

@@ -23,7 +23,7 @@ public final class DoctorQueryHandler implements DoctorQueryService {
 
     @Override
     public Mono<Boolean> isExistByEmail(final String email) {
-        return elasticDoctorRepository.existsByEmail(email);
+        return doctorRepository.existsByDoctorEmail(email);
     }
 
     @Override

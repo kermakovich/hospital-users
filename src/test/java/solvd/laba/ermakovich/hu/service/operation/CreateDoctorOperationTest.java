@@ -8,10 +8,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import solvd.laba.ermakovich.hu.domain.Doctor;
+import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
-import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 import solvd.laba.ermakovich.hu.helper.BaseTest;
+import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 import solvd.laba.ermakovich.hu.service.kafka.operation.CreateDoctorOperation;
 
 /**
@@ -28,13 +28,13 @@ final class CreateDoctorOperationTest extends BaseTest {
 
     @Test
     void reactsOnCreateElasticDoctor() {
-        var event = new CreateElasticDoctor(doctor);
-        Mockito.doReturn(Mono.just(doctor)).when(elasticDoctorRepository)
-                .save(Mockito.any(Doctor.class));
+        var event = new CreateElasticDoctor(elasticDoctor);
+        Mockito.doReturn(Mono.just(elasticDoctor)).when(elasticDoctorRepository)
+                .save(Mockito.any(ElasticDoctor.class));
         StepVerifier.create(createDoctorOperation.on(event))
                 .verifyComplete();
         Mockito.verify(elasticDoctorRepository, Mockito.times(1))
-                .save(Mockito.any(Doctor.class));
+                .save(Mockito.any(ElasticDoctor.class));
     }
 
 }

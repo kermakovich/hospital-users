@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+import solvd.laba.ermakovich.hu.domain.Doctor;
 import solvd.laba.ermakovich.hu.domain.aggregate.AggregateStatus;
 import solvd.laba.ermakovich.hu.domain.aggregate.doctor.DoctorAggregate;
 import solvd.laba.ermakovich.hu.domain.command.CreateDoctorCommand;
@@ -24,6 +25,7 @@ import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
 import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
+import solvd.laba.ermakovich.hu.web.mapper.DoctorMapper;
 
 
 /**
@@ -45,6 +47,9 @@ final class DoctorCommandHandlerTest extends BaseTest {
     KafkaProducer kafkaProducer;
 
     @Mock
+    DoctorMapper doctorMapper;
+
+    @Mock
     DoctorAggregateService doctorAggregateService;
 
     @InjectMocks
@@ -62,6 +67,9 @@ final class DoctorCommandHandlerTest extends BaseTest {
         Mockito.doNothing()
                 .when(eventService)
                 .create(Mockito.any(EventRoot.class));
+        Mockito.doReturn(elasticDoctor)
+                .when(doctorMapper)
+                .toElastic(Mockito.any(Doctor.class));
         Mockito.doNothing()
                 .when(kafkaProducer)
                 .synchronizeElastic(Mockito.any(CreateElasticDoctor.class));

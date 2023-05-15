@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-import solvd.laba.ermakovich.hu.domain.Doctor;
-import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
+import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.event.integration.CreateElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.event.integration.IntegrationEvent;
+import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 
 /**
  * @author Ermakovich Kseniya
@@ -29,7 +29,7 @@ public class CreateDoctorOperation implements Operation {
     @SneakyThrows
     public CreateElasticDoctor getCustomEvent(final IntegrationEvent event) {
         return new CreateElasticDoctor(new ObjectMapper()
-                .readValue(event.getPayload(), Doctor.class));
+                .readValue(event.getPayload(), ElasticDoctor.class));
     }
 
 }
