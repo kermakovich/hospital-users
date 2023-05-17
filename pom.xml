@@ -25,12 +25,12 @@
 		<lombok.version>1.18.26</lombok.version>
 		<maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
 		<reactor.test.version>3.5.5</reactor.test.version>
-		<junit.version>5.9.2</junit.version>
 		<mockito.version>5.3.1</mockito.version>
 		<spring.test.version>6.0.8</spring.test.version>
 		<jacoco.version>0.8.10</jacoco.version>
 		<surefire.version>3.0.0-M8</surefire.version>
 		<jtcop.version>0.1.13</jtcop.version>
+		<elasticsearch.testcontainer.version>1.18.1</elasticsearch.testcontainer.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -132,27 +132,21 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>${springboot.version}</version>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.test.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>${elasticsearch.testcontainer.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
