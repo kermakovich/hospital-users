@@ -9,7 +9,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<springboot.version>3.0.1</springboot.version>
+		<springboot.version>3.0.2</springboot.version>
 		<maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
 		<com.google.code.gson.version>2.10.1</com.google.code.gson.version>
 		<fasterxml.version>2.14.2</fasterxml.version>
@@ -24,13 +24,13 @@
 		<postgresql.version>42.6.0</postgresql.version>
 		<lombok.version>1.18.26</lombok.version>
 		<maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
-		<reactor.test.version>3.5.5</reactor.test.version>
+		<reactor.test.version>3.2.3.RELEASE</reactor.test.version>
 		<mockito.version>5.3.1</mockito.version>
 		<spring.test.version>6.0.8</spring.test.version>
 		<jacoco.version>0.8.10</jacoco.version>
 		<surefire.version>3.0.0-M8</surefire.version>
 		<jtcop.version>0.1.13</jtcop.version>
-		<elasticsearch.testcontainer.version>1.18.1</elasticsearch.testcontainer.version>
+		<testcontainer.version>1.18.1</testcontainer.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -146,7 +146,18 @@
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>${elasticsearch.testcontainer.version}</version>
+			<version>${testcontainer.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>${testcontainer.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${testcontainer.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

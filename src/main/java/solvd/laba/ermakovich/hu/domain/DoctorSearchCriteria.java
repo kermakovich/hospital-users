@@ -13,7 +13,7 @@ public class DoctorSearchCriteria {
     private BigDecimal pricePerHourFrom;
     private BigDecimal pricePerHourTo;
     private Department department;
-    private ArrayList<Specialization> specialization;
+    private ArrayList<Specialization> specializations;
     private String surname;
     private Float experienceFrom;
     private Float experienceTo;
