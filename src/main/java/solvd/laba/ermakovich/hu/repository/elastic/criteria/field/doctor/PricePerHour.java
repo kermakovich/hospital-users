@@ -9,7 +9,7 @@ import solvd.laba.ermakovich.hu.repository.elastic.criteria.field.Field;
  * @author Ermakovich Kseniya
  */
 @Component
-public class PricePerHourField implements Field {
+public class PricePerHour implements Field {
 
     @Override
     public void apply(final DoctorSearchCriteria searchCriteria,

@@ -9,19 +9,14 @@ import solvd.laba.ermakovich.hu.repository.elastic.criteria.field.Field;
  * @author Ermakovich Kseniya
  */
 @Component
-public class ExperienceField implements Field {
+public class Surname implements Field {
 
     @Override
     public void apply(final DoctorSearchCriteria searchCriteria,
                       final Criteria criteria) {
-        if (searchCriteria.getExperienceFrom() != null) {
-            criteria.and(Criteria.where("experience")
-                    .greaterThanEqual(searchCriteria.getExperienceFrom())
-            );
-        }
-        if (searchCriteria.getExperienceTo() != null) {
-            criteria.and(Criteria.where("experience")
-                    .greaterThanEqual(searchCriteria.getExperienceTo())
+        if (searchCriteria.getSurname() != null) {
+            criteria.and(Criteria.where("surname")
+                    .contains(searchCriteria.getSurname())
             );
         }
     }

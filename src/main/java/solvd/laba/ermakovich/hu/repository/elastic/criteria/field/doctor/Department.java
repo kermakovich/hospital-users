@@ -9,15 +9,14 @@ import solvd.laba.ermakovich.hu.repository.elastic.criteria.field.Field;
  * @author Ermakovich Kseniya
  */
 @Component
-public class SurnameField implements Field {
+public class Department implements Field {
 
     @Override
     public void apply(final DoctorSearchCriteria searchCriteria,
                       final Criteria criteria) {
-        if (searchCriteria.getSurname() != null) {
-            criteria.and(Criteria.where("surname")
-                    .contains(searchCriteria.getSurname())
-            );
+        if (searchCriteria.getDepartment() != null) {
+            criteria.and(Criteria.where("department")
+                    .is(searchCriteria.getDepartment()));
         }
     }
 
