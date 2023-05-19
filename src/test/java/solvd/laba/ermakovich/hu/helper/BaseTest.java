@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import solvd.laba.ermakovich.hu.domain.Department;
 import solvd.laba.ermakovich.hu.domain.Doctor;
+import solvd.laba.ermakovich.hu.domain.DoctorSearchCriteria;
 import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
 import solvd.laba.ermakovich.hu.domain.PatientAges;
 import solvd.laba.ermakovich.hu.domain.Specialization;
@@ -23,6 +24,7 @@ public abstract class BaseTest {
     protected static ElasticDoctor elasticDoctor;
     protected static DoctorAggregate doctorAggregate;
     protected static DoctorAggregate doctorAggregateWithoutDoctor;
+    protected static DoctorSearchCriteria doctorSearchCriteria;
 
     @BeforeAll
     static void doctorSetup() {
@@ -46,6 +48,7 @@ public abstract class BaseTest {
         elasticDoctor = new ElasticDoctor();
         elasticDoctor.setId("74e5ed85-c727-4441-8862-166bb4d5f07e");
         elasticDoctor.setExperience(2.4F);
+        elasticDoctor.setExternalId(UUID.fromString("688e40eb-3209-4a2e-83cc-6a178b1806ab"));
         elasticDoctor.setSpecialization(Specialization.THERAPIST);
         elasticDoctor.setSurname("pomidorov");
         elasticDoctor.setDepartment(Department.THERAPEUTIC);
@@ -68,6 +71,13 @@ public abstract class BaseTest {
                 UUID.randomUUID().toString(),
                 AggregateStatus.APPROVED
         );
+    }
+
+    @BeforeAll
+    static void doctorSearchCriteriaSetup() {
+        doctorSearchCriteria = new DoctorSearchCriteria();
+        doctorSearchCriteria.setDepartment(Department.THERAPEUTIC);
+        doctorSearchCriteria.setExperienceFrom(1F);
     }
 
 }

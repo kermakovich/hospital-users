@@ -24,7 +24,6 @@ public class ElasticDoctor {
     private Float experience;
     private UUID externalId;
 
-
     @Field(type = FieldType.Integer_Range)
     private PatientAges patientAges;
 

@@ -4,7 +4,7 @@ spring:
   application:
     name: hospital-users
   elasticsearch:
-    uris: ${ELASTICSEARCH_PORT}
+      uris: ${ELASTICSEARCH_PORT}:9200
   data:
     mongodb:
       authentication-database: admin
@@ -19,9 +19,5 @@ spring:
     bootstrap-servers: ${BOOTSTRAP_SERVERS}
     producer:
       topic: elasticsearch
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_HOST}
   instance:
     prefer-ip-address: true

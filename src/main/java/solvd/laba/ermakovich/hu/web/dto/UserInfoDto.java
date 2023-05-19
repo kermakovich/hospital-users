@@ -1,5 +1,6 @@
 package solvd.laba.ermakovich.hu.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -50,6 +51,7 @@ public abstract class UserInfoDto {
             groups = OnCreate.class)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(groups = OnCreate.class, message = "can`t be empty")
     @Size(min = 4, max = 20, message = "length should be in 4..20",
             groups = OnCreate.class)
