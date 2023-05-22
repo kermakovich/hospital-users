@@ -15,12 +15,9 @@ abstract public class ElasticsearchBaseIT extends BaseTest {
 
     private final static ElasticsearchBaseContainer elasticsearchContainer = new ElasticsearchBaseContainer();
 
-    static {
-        elasticsearchContainer.init();
-    }
-
     @BeforeAll
     static void setUp() {
+        elasticsearchContainer.init();
         elasticsearchContainer.start();
     }
 
