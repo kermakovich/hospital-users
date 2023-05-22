@@ -6,16 +6,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.junit.jupiter.Container;
 
 /**
  * @author Ermakovich Kseniya
  */
 @SuppressWarnings("JTCOP.RuleAllTestsHaveProductionClass")
-abstract public class ElasticsearchBaseTest extends BaseTest {
+abstract public class ElasticsearchBaseIT extends BaseTest {
 
-    @Container
-    private static final ElasticsearchBaseContainer elasticsearchContainer = new ElasticsearchBaseContainer();
+    private final static ElasticsearchBaseContainer elasticsearchContainer = new ElasticsearchBaseContainer();
+
+    static {
+        elasticsearchContainer.init();
+    }
 
     @BeforeAll
     static void setUp() {

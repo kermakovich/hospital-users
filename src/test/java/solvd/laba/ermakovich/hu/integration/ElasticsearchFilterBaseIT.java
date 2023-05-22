@@ -7,24 +7,23 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import solvd.laba.ermakovich.hu.domain.ElasticDoctor;
 import solvd.laba.ermakovich.hu.helper.BaseTest;
-import solvd.laba.ermakovich.hu.helper.ElasticsearchBaseTest;
+import solvd.laba.ermakovich.hu.helper.ElasticsearchBaseIT;
 import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 
 
 /**
  * @author Ermakovich Kseniya
  */
-@Testcontainers
+@SuppressWarnings("JTCOP.RuleAllTestsHaveProductionClass")
 @SpringBootTest
 @ContextConfiguration(classes = TestConfig.class)
 @ActiveProfiles("test")
-final class ElasticsearchFilterImplTest extends ElasticsearchBaseTest {
+final class ElasticsearchFilterBaseIT extends ElasticsearchBaseIT {
 
     private static final Pageable DEFAULT_PAGE_REQUEST = PageRequest.of(0, 20);
 
