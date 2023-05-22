@@ -25,6 +25,7 @@ public abstract class BaseTest {
     protected static DoctorAggregate doctorAggregate;
     protected static DoctorAggregate doctorAggregateWithoutDoctor;
     protected static DoctorSearchCriteria doctorSearchCriteria;
+    protected static DoctorSearchCriteria emptyDoctorSearchCriteria;
 
     @BeforeAll
     static void doctorSetup() {
@@ -78,6 +79,11 @@ public abstract class BaseTest {
         doctorSearchCriteria = new DoctorSearchCriteria();
         doctorSearchCriteria.setDepartment(Department.THERAPEUTIC);
         doctorSearchCriteria.setExperienceFrom(1F);
+    }
+
+    @BeforeAll
+    static void emptyDoctorSearchCriteriaSetup() {
+        emptyDoctorSearchCriteria = new DoctorSearchCriteria();
     }
 
 }
