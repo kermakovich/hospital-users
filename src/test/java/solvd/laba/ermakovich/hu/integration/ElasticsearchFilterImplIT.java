@@ -23,7 +23,7 @@ import solvd.laba.ermakovich.hu.repository.elastic.ElasticDoctorRepository;
 @SpringBootTest
 @ContextConfiguration(classes = TestConfig.class)
 @ActiveProfiles("test")
-final class ElasticsearchFilterBaseIT extends ElasticsearchBaseIT {
+final class ElasticsearchFilterImplIT extends ElasticsearchBaseIT {
 
     private static final Pageable DEFAULT_PAGE_REQUEST = PageRequest.of(0, 20);
 
