@@ -67,7 +67,7 @@ final class DoctorCommandHandlerTest extends BaseTest {
         Mockito.doNothing()
                 .when(eventService)
                 .create(Mockito.any(EventRoot.class));
-        Mockito.doReturn(elasticDoctor)
+        Mockito.doReturn(BaseTest.elasticDoctor)
                 .when(doctorMapper)
                 .toElastic(Mockito.any(Doctor.class));
         Mockito.doNothing()

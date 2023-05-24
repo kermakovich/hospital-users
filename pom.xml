@@ -31,6 +31,7 @@
 		<surefire.version>3.0.0-M8</surefire.version>
 		<jtcop.version>0.1.13</jtcop.version>
 		<testcontainer.version>1.18.1</testcontainer.version>
+		<failsafe.version>3.1.0</failsafe.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -151,11 +152,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
-			<artifactId>testcontainers</artifactId>
-			<version>${testcontainer.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${testcontainer.version}</version>
 			<scope>test</scope>
@@ -250,6 +246,22 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${failsafe.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.github.volodya-lombrozo</groupId>

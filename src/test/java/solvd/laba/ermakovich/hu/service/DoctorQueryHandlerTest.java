@@ -126,7 +126,7 @@ final class DoctorQueryHandlerTest extends BaseTest {
     void verifiesFindAllByCriteria() {
         final var criteria = BaseTest.doctorSearchCriteria;
         Mockito.doReturn(Flux.just(BaseTest.elasticDoctor,
-                BaseTest.elasticDoctor)
+                        BaseTest.elasticDoctor)
                 )
                 .when(elasticDoctorRepository)
                 .findAllByCriteria(criteria, DEFAULT_PAGEABLE);

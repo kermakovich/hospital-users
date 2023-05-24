@@ -28,8 +28,9 @@ final class CreateDoctorOperationTest extends BaseTest {
 
     @Test
     void reactsOnCreateElasticDoctor() {
-        var event = new CreateElasticDoctor(elasticDoctor);
-        Mockito.doReturn(Mono.just(elasticDoctor)).when(elasticDoctorRepository)
+        var event = new CreateElasticDoctor(BaseTest.elasticDoctor);
+        Mockito.doReturn(Mono.just(BaseTest.elasticDoctor))
+                .when(elasticDoctorRepository)
                 .save(Mockito.any(ElasticDoctor.class));
         StepVerifier.create(createDoctorOperation.on(event))
                 .verifyComplete();
