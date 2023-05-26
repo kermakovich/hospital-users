@@ -1,0 +1,18 @@
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'Spring Boot Application input'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['host.docker.internal:8085']
+        labels:
+          application: 'hospital-users'
+  - job_name: kafka-jmx-metrics
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['kafka:7071']
+        labels:
+          application: 'kafka'
