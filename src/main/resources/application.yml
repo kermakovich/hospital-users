@@ -21,3 +21,9 @@ spring:
       topic: elasticsearch
   instance:
     prefer-ip-address: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
