@@ -18,17 +18,17 @@ import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 @RequiredArgsConstructor
 public class GraphqlConfig {
 
-    private final Map<String, Coercing> coercingHashMap;
+    private final Map<String, Coercing> coercingMap;
 
     @Bean
     public RuntimeWiringConfigurer runtimeWiringConfigurer(
             final ValidationSchemaWiring validationSchemaWiring
     ) {
         return builder -> {
-            coercingHashMap.forEach((name, coercing) ->
+            coercingMap.forEach((name, coercing) ->
                     builder.scalar(GraphQLScalarType.newScalar()
                             .name(name)
-                            .coercing(coercingHashMap.get(name))
+                            .coercing(coercingMap.get(name))
                             .build()
                     ));
             builder.directiveWiring(validationSchemaWiring)
