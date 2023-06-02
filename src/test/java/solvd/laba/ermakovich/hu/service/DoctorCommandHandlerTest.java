@@ -25,7 +25,7 @@ import solvd.laba.ermakovich.hu.service.aggregate.DoctorAggregateService;
 import solvd.laba.ermakovich.hu.service.command.DoctorCommandHandler;
 import solvd.laba.ermakovich.hu.service.event.DoctorEventService;
 import solvd.laba.ermakovich.hu.service.query.DoctorQueryService;
-import solvd.laba.ermakovich.hu.web.mapper.DoctorMapper;
+import solvd.laba.ermakovich.hu.service.command.mapper.DoctorMapper;
 
 
 /**

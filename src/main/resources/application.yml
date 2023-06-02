@@ -1,6 +1,10 @@
 server:
   port: ${SERVER_PORT}
 spring:
+  graphql:
+    graphiql:
+      enabled:
+        true
   application:
     name: hospital-users
   elasticsearch:

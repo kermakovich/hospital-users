@@ -1,4 +1,4 @@
-package solvd.laba.ermakovich.hu.web;
+package solvd.laba.ermakovich.hu.web.config;
 
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -24,7 +24,6 @@ import java.util.Locale;
  */
 @Configuration
 public class WebConfig {
-
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
     private static final String TIME_FORMAT = "HH:mm";
