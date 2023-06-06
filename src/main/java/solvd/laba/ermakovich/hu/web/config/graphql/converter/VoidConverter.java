@@ -4,6 +4,7 @@ import graphql.schema.Coercing;
 import graphql.schema.CoercingParseLiteralException;
 import graphql.schema.CoercingParseValueException;
 import graphql.schema.CoercingSerializeException;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,18 +17,19 @@ public class VoidConverter implements Coercing<Void, String> {
     @Override
     public String serialize(final Object dataFetcherResult)
             throws CoercingSerializeException {
-        return null;
+        return "Void";
     }
 
     @Override
+    @SneakyThrows
     public Void parseValue(final Object input)
             throws CoercingParseValueException {
-        return null;
+        return Void.TYPE.cast(new Object());
     }
 
     @Override
     public Void parseLiteral(final Object input)
             throws CoercingParseLiteralException {
-        return null;
+        return Void.TYPE.cast(new Object());
     }
 }
