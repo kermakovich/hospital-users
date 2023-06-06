@@ -1,0 +1,97 @@
+scalar LocalDate
+scalar BigDecimal
+scalar Void
+
+directive @PositiveOrZero(message : String) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @NotBlank(message : String) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Size(min : Int = 0, max : Int = 2147483647, message : String) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Positive(message : String) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+type Query {
+    getByCriteria(criteria: DoctorSearchCriteria!, page: Int = 0, size: Int = 5): [DoctorAggregate]
+}
+
+type Mutation {
+    create(doctor: DoctorInput!): Void
+    deleteByExternalId(externalId: String!): Void
+}
+
+type DoctorAggregate {
+    id: String
+    type: String
+    doctor: Doctor
+    status: AggregateStatus
+}
+
+type Doctor {
+    id: ID!
+    name: String!
+    surname: String!
+    fatherhood: String
+    department: Department!
+    specialization: Specialization
+    email: String!
+    role: String!
+    cabinet: Int!
+    birthday: LocalDate
+    pricePerHour: BigDecimal!
+    experience: Float!
+    patientAges: PatientAges!
+    externalId: String!
+}
+
+type PatientAges {
+    from: Int
+    to: Int
+}
+
+input DoctorInput {
+    name: String! @NotBlank(message: "can`t be empty") @Size(min: 1, max: 35, message: "length should be in 1..35")
+    surname: String! @NotBlank(message: "can`t be empty") @Size(min: 1, max: 35, message: "length should be in 1..35")
+    fatherhood: String
+    department: Department!
+    specialization: Specialization
+    email: String! @Size(min: 3, max: 320, message: "length should be in 3..320")
+    role: String!
+    cabinet: Int!
+    birthday: LocalDate,
+    pricePerHour: BigDecimal! @PositiveOrZero(message: "price can't be negative")
+    experience: Float! @PositiveOrZero(message: "experience can't be negative")
+    patientAges: PatientAgesInput!
+    password: String!  @Size(min: 4, max: 20, message: "length should be in 4..20")
+}
+
+input DoctorSearchCriteria {
+    pricePerHourFrom: BigDecimal,
+    pricePerHourTo: BigDecimal,
+    department: Department,
+    specializations: [Specialization]
+    surname: String,
+    experienceFrom: Float,
+    experienceTo: Float,
+    patientAge: Int
+}
+
+input PatientAgesInput {
+    from: Int! @PositiveOrZero(message: "patient age from can't be negative")
+    to: Int! @Positive(message: "patient age to can't be negative or 0")
+}
+
+enum AggregateStatus {
+    PENDING,
+    APPROVED,
+    REJECTED
+}
+
+enum Department {
+    SURGERY,
+    THERAPEUTIC,
+    DENTAL
+}
+
+enum Specialization {
+    DENTIST,
+    THERAPIST,
+    ENDOCRINOLOGIST,
+    PHYSIOTHERAPIST
+}

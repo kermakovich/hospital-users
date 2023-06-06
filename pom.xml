@@ -33,6 +33,7 @@
 		<testcontainer.version>1.18.1</testcontainer.version>
 		<failsafe.version>3.1.0</failsafe.version>
 		<micrometr.version>1.11.0</micrometr.version>
+		<graphql.validation.version>20.0</graphql.validation.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,11 +55,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
-			<version>${springboot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
 			<version>${springboot.version}</version>
 		</dependency>
 		<dependency>
@@ -101,6 +97,17 @@
 			<groupId>io.projectreactor.kafka</groupId>
 			<artifactId>reactor-kafka</artifactId>
 			<version>${kafka.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>io.projectreactor</groupId>
+					<artifactId>reactor-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>${springboot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
@@ -178,6 +185,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<version>${springboot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-graphql</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java-extended-validation</artifactId>
+			<version>${graphql.validation.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
